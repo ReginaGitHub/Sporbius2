@@ -21,7 +21,7 @@
             <div class="pull-right">
               <h6>
                 <router-link class="link footer-link" to="/forgotpassword">
-                  <span style="font-size: small; text-decoration: underline;">Forgot Password?</span>
+                  <span style="font-size: medium; text-decoration: underline;">Forgot Password?</span>
                 </router-link>
               </h6>
             </div>
