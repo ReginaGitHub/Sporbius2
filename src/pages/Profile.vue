@@ -125,8 +125,35 @@
 </template>
 <script>
 import { Tabs, TabPane } from '@/components';
+import Router from 'vue-router';
 
 if (sessionStorage.length == 0) {
+  
+  const router = new Router({
+  routes: [
+    {
+      path: '/',
+      name: 'landing',
+      components: { default: Landing, header: MainNavbar, footer: MainFooter },
+      props: {
+        header: { colorOnScroll: 400 },
+        footer: { backgroundColor: 'black' }
+      }
+    },
+    
+    
+  ],
+  scrollBehavior: to => {
+    if (to.hash) {
+      return { selector: to.hash };
+    } else {
+      return { x: 0, y: 0 };
+    }
+  }
+});
+
+  this.$router.push({ name: '/' });
+
 }
 
 export default {
