@@ -98,8 +98,22 @@ export default {
           this.$router.push({ name: "profile" });
           console.log(firebase.auth().currentUser.uid)
         }).catch((err) => {
+          console.log(err.code)
           this.error = true;
-          this.errorMsg = "Invalid email or password. Please key in again";
+          switch (err.code) {
+            case "auth/invalid-email":
+              this.errorMsg = "Invalid email";
+              break;
+            case "auth/user-not-found":
+              this.errorMsg = "No account with the email was found";
+              break;
+            case "auth/wrong-password":
+              this.errorMsg = "Incorrect password";
+              break;
+            default:
+              this.errorMsg = "Email or password was incorrect";
+              break;
+          }
         })
         return;
       }

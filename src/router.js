@@ -13,8 +13,29 @@ import ForgetPassword from './pages/ForgetPassword.vue';
 import MainNavbar from './layout/MainNavbar.vue';
 import MainFooter from './layout/MainFooter.vue';
 import CoachLandingNavbar from './layout/CoachLandingNavbar.vue';
+import {initializeApp} from "firebase/app";
+
+import {
+    getAuth, createUserWithEmailAndPassword, signOut, signInWithEmailAndPassword,
+    onAuthStateChanged,sendPasswordResetEmail
+} from "firebase/auth";
+
 
 Vue.use(Router);
+
+
+// Router.beforeEach((to,from, next) =>  {
+//   if (to.matched.some((record) => record.meta.requiresAuth)) {
+//     if (getAuth().currentUser) {
+//       next();
+//     } else {
+//       alert("you dont have access!");
+//       next("/");
+//     }
+//   } else {
+
+//   }
+// })
 
 export default new Router({
   linkExactActiveClass: 'active',
@@ -49,6 +70,9 @@ export default new Router({
       path: '/profile',
       name: 'profile',
       components: { default: Profile, header: MainNavbar, footer: MainFooter },
+      meta: {
+        requiresAuth: true,
+      },
       props: {
         header: { colorOnScroll: 400 },
         footer: { backgroundColor: 'black' }
@@ -104,3 +128,4 @@ export default new Router({
     }
   }
 });
+
