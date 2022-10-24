@@ -1,5 +1,7 @@
 import Vue from 'vue';
 import Router from 'vue-router';
+import createRouter from 'vue-router';
+import createWebHistory from 'vue-router';
 import Index from './pages/Index.vue';
 import Landing from './pages/Landing.vue';
 import Login from './pages/Login.vue';
@@ -24,20 +26,7 @@ import {
 Vue.use(Router);
 
 
-// Router.beforeEach((to,from, next) =>  {
-//   if (to.matched.some((record) => record.meta.requiresAuth)) {
-//     if (getAuth().currentUser) {
-//       next();
-//     } else {
-//       alert("you dont have access!");
-//       next("/");
-//     }
-//   } else {
-
-//   }
-// })
-
-export default new Router({
+const router = new Router({
   linkExactActiveClass: 'active',
   routes: [
     // {
@@ -129,3 +118,29 @@ export default new Router({
   }
 });
 
+// const getCurrentUser = () => {
+//   return new Promise((resolve,reject) => {
+//     getAuth(),
+//     (user) => {
+//       removeEventListener();
+//       resolve(user)
+//     },
+//     reject;
+//   });
+// };
+
+
+export default router;
+
+// router.beforeEach(async(to,from, next) =>  {
+//   if (to.matched.some((record) => record.meta.requiresAuth)) {
+//     if (await getCurrentUser) {
+//       next();
+//     } else {
+//       alert("you dont have access!");
+//       next("/");
+//     }
+//   } else {
+
+//   }
+// })

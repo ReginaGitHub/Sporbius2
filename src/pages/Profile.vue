@@ -126,6 +126,9 @@
 <script>
 import { Tabs, TabPane } from '@/components';
 
+if (sessionStorage.length == 0) {
+}
+
 export default {
   name: 'profile',
   bodyClass: 'profile-page',

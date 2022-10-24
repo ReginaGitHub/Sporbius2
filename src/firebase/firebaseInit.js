@@ -28,9 +28,11 @@ var uid = null;
 onAuthStateChanged(auth, (user) => {
     if (user != null) {
         uid = user.uid;
+        sessionStorage.setItem("id", uid);
         console.log(user.uid)
     }
     else {
+      sessionStorage.clear();
       uid = null;
     }
     
