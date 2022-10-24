@@ -67,7 +67,7 @@
                 </div>
               </div>
               <h3 class="title">
-                Sporbius is an app that connects avid sports players.
+                Sporbius is a web app that connects avid sports players.
               </h3>
               <h5>
                 The one and only platform that links professional coaches to interested players.
