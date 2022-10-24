@@ -101,7 +101,7 @@
                     <div class="row">
                         <div class="col-md-3">
                             <div class="team-player">
-                                <img src="images/DexterProfilePic.jpg" alt="Thumbnail Image"
+                                <img src="images/ArthurProfilePic.jpeg" alt="Thumbnail Image"
                                     class="rounded-circle img-fluid img-raised" />
                                 <h4 class="title">Arthur Cheng</h4>
                                 <p class="category text-primary">CIO</p>
