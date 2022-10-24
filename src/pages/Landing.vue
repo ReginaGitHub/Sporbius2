@@ -70,21 +70,12 @@
                 Sporbius is an app that connects avid sports players.
               </h3>
               <h5>
-                The Arctic Ocean freezes every winter and much of the sea-ice
-                then thaws every summer, and that process will continue whatever
-                happens with climate change. Even if the Arctic continues to be
-                one of the fastest-warming regions of the world, it will always
-                be plunged into bitterly cold polar dark every winter. And
-                year-by-year, for all kinds of natural reasons, there’s huge
-                variety of the state of the ice.
+                The one and only platform that links professional coaches to interested players.
+                Lead by example by joining us as a coach or even play with like minded people near you!
               </h5>
               <h5>
-                For a start, it does not automatically follow that a record
-                amount of ice will melt this summer. More important for
-                determining the size of the annual thaw is the state of the
-                weather as the midnight sun approaches and temperatures rise.
-                But over the more than 30 years of satellite records, scientists
-                have observed a clear pattern of decline, decade-by-decade.
+                Getting started has never been this easy with Sporbius, connecting with players and coaches
+                to play the sports that you love. So come on and join us and play a game!
               </h5>
             </div>
           </div>

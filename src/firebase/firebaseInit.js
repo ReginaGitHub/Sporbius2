@@ -1,5 +1,11 @@
 import firebase from "firebase/compat/app";
 import 'firebase/compat/firestore';
+import {initializeApp} from "firebase/app";
+
+import {
+    getAuth, createUserWithEmailAndPassword, signOut, signInWithEmailAndPassword,
+    onAuthStateChanged,sendPasswordResetEmail
+} from "firebase/auth";
 
 const firebaseConfig = {
   apiKey: "AIzaSyCaMNYpZsSjWvO5fgeNezjvVOdKkx3S0DI",
@@ -16,3 +22,16 @@ const timestamp = firebase.firestore.FieldValue.serverTimestamp;
 
 export {timestamp};
 export default firebaseApp.firestore();
+
+const auth = getAuth();
+var uid = null;
+onAuthStateChanged(auth, (user) => {
+    if (user != null) {
+        uid = user.uid;
+        console.log(user.uid)
+    }
+    else {
+      uid = null;
+    }
+    
+})
