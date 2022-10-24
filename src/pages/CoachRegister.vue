@@ -26,25 +26,27 @@
                             <router-link to="/coachlanding">
                                 <img v-lazy="'images/logo.png'" style="width: 280px; margin-bottom: 40px;" alt="" />
                             </router-link>
-
+                            <form @submit.prevent="register">
                             <h2 class="title">Register as Coach</h2>
                             <fg-input class="no-border input-lg" addon-left-icon="now-ui-icons users_circle-08"
                                 placeholder="Name..." v-model="name">
                             </fg-input>
 
-                            <fg-input class="no-border input-lg" addon-left-icon="now-ui-icons text_caps-small"
+                            <fg-input type="email" class="no-border input-lg" addon-left-icon="now-ui-icons text_caps-small"
                                 placeholder="Email Address..." v-model="email">
                             </fg-input>
 
-                            <fg-input class="no-border input-lg" addon-left-icon="now-ui-icons text_caps-small"
+                            <fg-input type="password" class="no-border input-lg" addon-left-icon="now-ui-icons text_caps-small"
                                 placeholder="Password" v-model="password">
                             </fg-input>
 
-                            <div v-show="error" class="error" style="text-align: center; font-size:large; color: red;">
-                                {{ this.errorMsg }}</div>
+                            <div v-show="error" class="error"  style="text-align: center; font-size:large; color: red;">
+                                    {{ this.errorMsg }}
+                               
+                            </div>
 
                             <div class="card-footer text-center">
-                                <button @click.prevent="register"
+                                <button 
                                     class="btn btn-primary btn-round btn-lg btn-block">Register</button>
                             </div>
                             <div class="pull-left">
@@ -58,6 +60,7 @@
                             <div class="pull-right">
                                 <h6></h6>
                             </div>
+                        </form>
                         </card>
                     </div>
                 </div>
@@ -84,29 +87,72 @@ export default {
             email: null,
             password: null,
             error: null,
-            errorMsg: "",
+            errorMsg: null,
+            // lowerCaseLetters: "/[a-z]/g",
+            // upperCaseLetters: "/[A-Z]/g",
+            // numbers: "/[0-9]/g",
+
+
         }
     },
     methods: {
         async register() {
-            if (this.name !== "" && this.email !== "" && this.password !== "" && this.name !== null && this.email !== null && this.password !== null) {
+            console.log("running times");
+            var lowerCaseLetters = /[a-z]/g;
+            var upperCaseLetters = /[A-Z]/g;
+            var numbers = /[0-9]/g;
+            var endingEmail = /[.com]/g
+
+            if (this.name == "") {
+                this.error = true;
+                this.errorMsg = "Please input name."
+            }
+
+            else if (!this.email.match(endingEmail)) {
+                this.error = true;
+                this.errorMsg = "Please indicate correct email"
+            }
+            else if (this.password.length < 8) {
+                this.error = true;
+                this.errorMsg = "Password needs to be at least 8 character."
+            }
+            else if (!(this.password.match(lowerCaseLetters))) {  
+                this.error = true;
+                this.errorMsg = "Please have at least 1 lower case letter."
+            }
+            else if(!(this.password.match(upperCaseLetters))) { 
+                this.error = true;
+                this.errorMsg = "Please have at least 1 upper case letter."
+            }
+            else if(!(this.password.match(numbers))) { 
+                this.error = true;
+                this.errorMsg = "Please have at least 1 number."
+                
+
+            }
+            // else (this.name !== "" && this.email !== "" && this.password !== "" && this.name !== null && this.email !== null && this.password !== null) {
+            else {
                 this.error = false;
                 this.errorMsg = "";
                 const firebaseAuth = await firebase.auth();
-                const createUser = await firebaseAuth.createUserWithEmailAndPassword(this.email, this.password);
-                const result = await createUser;
-                const database = db.collection("users").doc(result.user.uid);
-                await database.set({
+                try {
+                    const createUser = await firebaseAuth.createUserWithEmailAndPassword(this.email, this.password);
+                    const result = await createUser;
+                    const database = db.collection("users").doc(result.user.uid);
+                    await database.set({
                     name: this.name,
                     email: this.email,
                     role: 'coach',
                 })
                 this.$router.push({ name: 'profile' });
                 return;
+                }
+                catch(err) {
+                    this.error = true;
+                    this.errorMsg = "Email has been taken. Please choose another email.";
+                    return;
+                }
             }
-            this.error = true;
-            this.errorMsg = "Please fill out all the fields!";
-            return;
 
         },
     },

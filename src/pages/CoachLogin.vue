@@ -29,18 +29,18 @@
               <router-link to="/coachlanding">
                 <img v-lazy="'images/logo.png'" style="width: 280px; margin-bottom: 40px;" alt="" />
               </router-link>
-
+              <form @submit.prevent="login">
               <h2 class="title">Login as Coach</h2>
-              <fg-input class="no-border input-lg" addon-left-icon="now-ui-icons users_circle-08"
+              <fg-input type="email" class="no-border input-lg" addon-left-icon="now-ui-icons users_circle-08"
                 placeholder="Email Address..." v-model="email">
               </fg-input>
 
-              <fg-input class="no-border input-lg" addon-left-icon="now-ui-icons text_caps-small"
+              <fg-input type="password" class="no-border input-lg" addon-left-icon="now-ui-icons text_caps-small"
                 placeholder="Password..." v-model="password">
               </fg-input>
               <div class="pull-right">
                 <h6>
-                  <router-link class="link footer-link" to="/forgotpassword">
+                  <router-link class="link footer-link" to="/forgetpassword">
                     <span style="font-size: small; text-decoration: underline;">Forgot Password?</span>
                   </router-link>
                 </h6>
@@ -50,7 +50,7 @@
                 this.errorMsg
                 }}</div>
               <div class="card-footer text-center">
-                <button @click.prevent="login" class="btn btn-primary btn-round btn-lg btn-block">Login</button>
+                <button class="btn btn-primary btn-round btn-lg btn-block">Login</button>
               </div>
               <div class="pull-left">
                 <h6>
@@ -60,7 +60,7 @@
                   </router-link>
                 </h6>
               </div>
-
+              </form>
             </card>
           </div>
         </div>
@@ -93,17 +93,16 @@ export default {
     async login() {
       if (this.email !== "" && this.password !== "" && this.email !== null && this.password !== null) {
         firebase.auth().signInWithEmailAndPassword(this.email, this.password).then(() => {
-          this.$router.push({ name: "profile" });
           this.error = false;
           this.errorMsg = "";
+          this.$router.push({ name: "profile" });
           console.log(firebase.auth().currentUser.uid)
         }).catch((err) => {
           this.error = true;
-          this.errorMsg = err;
+          this.errorMsg = "Invalid email or password. Please key in again";
         })
         return;
       }
-
       this.error = true;
       this.errorMsg = "Please fill out all the fields!";
 
