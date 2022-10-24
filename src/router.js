@@ -1,7 +1,5 @@
 import Vue from 'vue';
 import Router from 'vue-router';
-import createRouter from 'vue-router';
-import createWebHistory from 'vue-router';
 import Index from './pages/Index.vue';
 import Landing from './pages/Landing.vue';
 import Login from './pages/Login.vue';
@@ -15,12 +13,6 @@ import ForgetPassword from './pages/ForgetPassword.vue';
 import MainNavbar from './layout/MainNavbar.vue';
 import MainFooter from './layout/MainFooter.vue';
 import CoachLandingNavbar from './layout/CoachLandingNavbar.vue';
-import {initializeApp} from "firebase/app";
-
-import {
-    getAuth, createUserWithEmailAndPassword, signOut, signInWithEmailAndPassword,
-    onAuthStateChanged,sendPasswordResetEmail
-} from "firebase/auth";
 
 
 Vue.use(Router);
@@ -118,29 +110,6 @@ const router = new Router({
   }
 });
 
-// const getCurrentUser = () => {
-//   return new Promise((resolve,reject) => {
-//     getAuth(),
-//     (user) => {
-//       removeEventListener();
-//       resolve(user)
-//     },
-//     reject;
-//   });
-// };
 
 
 export default router;
-
-// router.beforeEach(async(to,from, next) =>  {
-//   if (to.matched.some((record) => record.meta.requiresAuth)) {
-//     if (await getCurrentUser) {
-//       next();
-//     } else {
-//       alert("you dont have access!");
-//       next("/");
-//     }
-//   } else {
-
-//   }
-// })
