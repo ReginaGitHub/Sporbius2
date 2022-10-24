@@ -109,13 +109,9 @@
                                     With Sporbius, the sports world will never be the same again. What a great platform
                                     to match student to qualified coaches.
                                 </h5>
-                                <a href="#pablo" class="btn btn-primary btn-icon btn-round" target="_blank"><i
-                                        class="fab fa-twitter"></i></a>
-                                <a href="#pablo" class="btn btn-primary btn-icon btn-round" target="_blank"><i
-                                        class="fab fa-facebook-square"></i></a>
-                                <a href="#pablo" class="btn btn-primary btn-icon btn-round" target="_blank"><i
+                                <a href="https://www.instagram.com/a.rrrc/" class="btn btn-primary btn-icon btn-round" target="_blank"><i
                                         class="fab fa-instagram" target="_blank"></i></a>
-                                <a href="https://www.linkedin.com/in/idexterchuaa"
+                                <a href="https://www.linkedin.com/in/arthur-cheng-a74a891b4/"
                                     class="btn btn-primary btn-icon btn-round" target="_blank"><i class="fab fa-linkedin"></i></a>
                             </div>
                         </div>
@@ -146,13 +142,8 @@
                                     JUST DO IT. Calling all Sports enthusiasts, we offer a variety of sports in which
                                     you can find qualified coaches to learn from.
                                 </h5>
-                                <a href="#pablo" class="btn btn-primary btn-icon btn-round"><i
-                                        class="fab fa-google-plus" target="_blank"></i></a>
-                                <a href="#pablo" class="btn btn-primary btn-icon btn-round"><i
-                                        class="fab fa-youtube" target="_blank"></i></a>
-                                <a href="#pablo" class="btn btn-primary btn-icon btn-round"><i
-                                        class="fab fa-twitter" target="_blank"></i></a>
-                                <a href="#pablo" class="btn btn-primary btn-icon btn-round"><i
+                              
+                                <a href="https://www.instagram.com/justdexter/" class="btn btn-primary btn-icon btn-round"><i
                                         class="fab fa-instagram" target="_blank"></i></a>
                                 <a href="https://www.linkedin.com/in/idexterchuaa"
                                     class="btn btn-primary btn-icon btn-round" target="_blank"><i class="fab fa-linkedin"></i></a>
@@ -168,12 +159,6 @@
                                     Sporbius. Indeed the perfect platform in finding suitable coaches while still
                                     widening the consumer base of coaches.
                                 </h5>
-                                <a href="#pablo" class="btn btn-primary btn-icon btn-round"><i
-                                        class="fab fa-google-plus" target="_blank"></i></a>
-                                <a href="#pablo" class="btn btn-primary btn-icon btn-round"><i
-                                        class="fab fa-youtube" target="_blank"></i></a>
-                                <a href="#pablo" class="btn btn-primary btn-icon btn-round"><i
-                                        class="fab fa-twitter" target="_blank"></i></a>
                                 <a href="#pablo" class="btn btn-primary btn-icon btn-round"><i
                                         class="fab fa-instagram" target="_blank"></i></a>
                                 <a href="https://www.linkedin.com/in/weederek"
