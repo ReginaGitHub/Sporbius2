@@ -4,7 +4,7 @@
     type="primary"
     :transparent="transparent"
     :color-on-scroll="colorOnScroll"
-    menu-classes="ml-auto"
+    menu-classes="ml-auto"    
   >
     <template>
       <router-link class="navbar-brand" to="">
@@ -119,6 +119,20 @@
           <p class="d-lg-none d-xl-none">Instagram</p>
         </a>
       </li>
+      <li class="nav-item">
+          <form v-if="sesID != ''"  @click="signout">
+            <div class="nav-link btn btn-neutral"  >
+            <p>Signout</p>
+            </div>
+          </form>
+        </li>
+      <!-- <li class="nav-item">
+        <form v-if="sesID != '' || sesID != null" @click="signout">
+          <router-link class="nav-link btn btn-neutral"  to="/" >
+          <p>Signout</p>
+      </router-link>
+        </form>
+      </li> -->
     </template>
   </navbar>
 </template>
@@ -131,22 +145,37 @@ import {
     onAuthStateChanged,sendPasswordResetEmail
 } from "firebase/auth";
 
-var sesID = sessionStorage.id;
 
 
 export default {
   name: 'main-navbar',
+  data() {
+    return {
+      sesID: sessionStorage.id
+
+    }
+  },
   props: {
     transparent: Boolean,
     colorOnScroll: Number,
-    sesID: sesID,
   },
   components: {
     DropDown,
     Navbar,
     NavLink,
     [Popover.name]: Popover
-  }
+    },
+    methods: {
+      signout() {
+        console.log(this.sesID)
+        const auth = getAuth();
+        signOut(auth).then(() => {
+          sessionStorage.id = "";
+          this.sesID = "";
+          this.$router.push({ name: 'landing' });
+        })
+      }
+    }
 };
 
 </script>

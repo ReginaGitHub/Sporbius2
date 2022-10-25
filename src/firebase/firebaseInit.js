@@ -32,7 +32,7 @@ onAuthStateChanged(auth, (user) => {
         console.log(user.uid)
     }
     else {
-      sessionStorage.clear();
+      sessionStorage.id = "";
       uid = null;
     }
     
