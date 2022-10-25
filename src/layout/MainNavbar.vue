@@ -126,11 +126,20 @@
 <script>
 import { DropDown, Navbar, NavLink } from '@/components';
 import { Popover } from 'element-ui';
+import {
+    getAuth, createUserWithEmailAndPassword, signOut, signInWithEmailAndPassword,
+    onAuthStateChanged,sendPasswordResetEmail
+} from "firebase/auth";
+
+var sesID = sessionStorage.id;
+
+
 export default {
   name: 'main-navbar',
   props: {
     transparent: Boolean,
-    colorOnScroll: Number
+    colorOnScroll: Number,
+    sesID: sesID,
   },
   components: {
     DropDown,
@@ -139,6 +148,7 @@ export default {
     [Popover.name]: Popover
   }
 };
+
 </script>
 
 <style scoped></style>

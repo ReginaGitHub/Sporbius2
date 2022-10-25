@@ -17,6 +17,8 @@ import CoachLandingNavbar from './layout/CoachLandingNavbar.vue';
 
 Vue.use(Router);
 
+sessionStorage.id
+
 
 const router = new Router({
   linkExactActiveClass: 'active',

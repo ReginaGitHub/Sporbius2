@@ -119,6 +119,11 @@
             <p class="d-lg-none d-xl-none">Instagram</p>
           </a>
         </li>
+        <li class="nav-item" v-if="sesID != ''" @click="signout" >
+          <router-link class="nav-link btn btn-neutral" to="/">
+            <p>Signout</p>
+        </router-link>
+        </li>
       </template>
     </navbar>
   </template>
@@ -126,17 +131,36 @@
   <script>
   import { DropDown, Navbar, NavLink } from '@/components';
   import { Popover } from 'element-ui';
+
+  // lenSession = sessionStorage.length();
+  // console.log(sessionStorage.id)
+  import {
+    getAuth, createUserWithEmailAndPassword, signOut, signInWithEmailAndPassword,
+    onAuthStateChanged,sendPasswordResetEmail
+} from "firebase/auth";
+import router from '../router';
+
   export default {
     name: 'main-navbar',
     props: {
       transparent: Boolean,
-      colorOnScroll: Number
+      colorOnScroll: Number,
+      sesID: sessionStorage.id
     },
     components: {
       DropDown,
       Navbar,
       NavLink,
       [Popover.name]: Popover
+    },
+    methods: {
+      signout() {
+        const auth = getAuth();
+        signOut(auth).then(() => {
+          this.$router.push({ name: '/' });
+          this.sesID = "";
+        })
+      }
     }
   };
   </script>

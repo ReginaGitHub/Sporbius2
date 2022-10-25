@@ -10,7 +10,7 @@
 </template>
 <script>
 
-sessionStorage
+var sesID = sessionStorage.id
 
 
 export default {};

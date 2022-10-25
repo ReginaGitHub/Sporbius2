@@ -127,7 +127,7 @@
 import { Tabs, TabPane } from '@/components';
 import Router from 'vue-router';
 
-if (sessionStorage.length == 0) {
+if (sessionStorage.id == '') {
   
   const router = new Router({
   routes: [
