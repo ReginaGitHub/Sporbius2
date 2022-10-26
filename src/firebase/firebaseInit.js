@@ -6,6 +6,10 @@ import {
     getAuth, createUserWithEmailAndPassword, signOut, signInWithEmailAndPassword,
     onAuthStateChanged,sendPasswordResetEmail
 } from "firebase/auth";
+import { doc, getDoc } from "firebase/firestore";
+
+
+
 
 const firebaseConfig = {
   apiKey: "AIzaSyCaMNYpZsSjWvO5fgeNezjvVOdKkx3S0DI",
@@ -22,6 +26,19 @@ const timestamp = firebase.firestore.FieldValue.serverTimestamp;
 
 export {timestamp};
 export default firebaseApp.firestore();
+// if (user != null) {
+//   const docRef = doc(db, "user", sessionStorage.id);
+//   const docSnap = await getDoc(docRef);
+
+
+//   if (docSnap.exists()) {
+//     console.log("Document data:", docSnap.data());
+//   } else {
+//     // doc.data() will be undefined in this case
+//     console.log("No such document!");
+//   }
+// }
+
 
 const auth = getAuth();
 var uid = null;
@@ -30,6 +47,7 @@ onAuthStateChanged(auth, (user) => {
         uid = user.uid;
         sessionStorage.setItem("id", uid);
         console.log(user.uid)
+
     }
     else {
       sessionStorage.id = "";
