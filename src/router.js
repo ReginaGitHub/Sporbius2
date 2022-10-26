@@ -72,7 +72,8 @@ const router = new Router({
     {
       path: '/coachlanding',
       name: 'coachlanding',
-      components: { default: CoachLanding, header: CoachLandingNavbar, footer: MainFooter },
+      //CoachLandingNavbar
+      components: { default: CoachLanding, header: MainNavbar, footer: MainFooter },
       props: {
         header: { colorOnScroll: 400 },
         footer: { backgroundColor: 'black' }
@@ -80,7 +81,7 @@ const router = new Router({
     },
     {
       path: '/coachlogin',
-      name: 'coachlogin',
+      name: 'regicoachloginster',
       components: { default: CoachLogin },
       props: {
         header: { colorOnScroll: 400 },
