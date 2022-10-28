@@ -1,0 +1,32 @@
+{
+  "name": "Sporbius",
+  "version": "1.1.0",
+  "private": true,
+  "scripts": {
+    "serve": "vue-cli-service serve",
+    "build": "vue-cli-service build",
+    "lint": "vue-cli-service lint"
+  },
+  "dependencies": {
+    "bootstrap": "^4.5.0",
+    "core-js": "^3.6.5",
+    "element-ui": "^2.13.2",
+    "firebase": "^9.12.1",
+    "nouislider": "^14.6.0",
+    "vue": "^2.6.11",
+    "vue-lazy-load": "^0.0.7",
+    "vue-lazyload": "^1.3.3",
+    "vue-router": "^3.6.5",
+    "vue2-transitions": "^0.3.0",
+    "yarn": "^1.22.19"
+  },
+  "devDependencies": {
+    "@vue/cli-plugin-babel": "^5.0.8",
+    "@vue/cli-service": "^5.0.8",
+    "babel-plugin-component": "^1.1.1",
+    "sass": "^1.55.0",
+    "sass-loader": "^8.0.2",
+    "vue-template-compiler": "^2.6.11",
+    "webpack": "^5.74.0"
+  }
+}
