@@ -66,8 +66,9 @@
           <i class="now-ui-icons users_single-02"></i> Profile
         </nav-link>
       </drop-down> -->
-      <li class="nav-item">
-        <router-link class="nav-link btn btn-neutral" to="/coachlanding">
+      <div v-if="sesID == ''">
+        <li class="nav-item" v-if="role == 'student'"  @click="changeRole('coach')">
+        <router-link class="nav-link btn btn-neutral"  to="/coachlanding">
           <p>Are you a Coach?</p>
       </router-link>
         <!-- <a 
@@ -80,6 +81,13 @@
         </a> -->
       </li>
 
+      <li class="nav-item" v-else @click="changeRole('student')" >
+          <router-link class="nav-link btn btn-neutral"   to="/">
+            <p>Are you a Student?</p>
+        </router-link>
+        </li>
+      </div>
+      
       <li class="nav-item">
         <a
           class="nav-link"
@@ -151,7 +159,8 @@ export default {
   name: 'main-navbar',
   data() {
     return {
-      sesID: sessionStorage.id
+      sesID: sessionStorage.id,
+      role: sessionStorage.role
 
     }
   },
@@ -166,6 +175,10 @@ export default {
     [Popover.name]: Popover
     },
     methods: {
+      changeRole(roles) {
+        this.role = roles
+        sessionStorage.role = roles
+      },
       signout() {
         console.log(this.sesID)
         const auth = getAuth();

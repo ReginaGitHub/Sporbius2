@@ -1,12 +1,12 @@
 import firebase from "firebase/compat/app";
 import 'firebase/compat/firestore';
 import {initializeApp} from "firebase/app";
-
+// import { collection, doc, getDoc, getDocs } from "firebase/firestore";
+// import db from '../firebase/firebaseInit';
 import {
     getAuth, createUserWithEmailAndPassword, signOut, signInWithEmailAndPassword,
     onAuthStateChanged,sendPasswordResetEmail
 } from "firebase/auth";
-import { doc, getDoc } from "firebase/firestore";
 
 
 
@@ -23,7 +23,6 @@ const firebaseConfig = {
 
 const firebaseApp = firebase.initializeApp(firebaseConfig);
 const timestamp = firebase.firestore.FieldValue.serverTimestamp;
-
 export {timestamp};
 export default firebaseApp.firestore();
 // if (user != null) {
@@ -42,15 +41,33 @@ export default firebaseApp.firestore();
 
 const auth = getAuth();
 var uid = null;
+sessionStorage.setItem("id", "");
+sessionStorage.setItem("role", "student");
+
+
+// if (uid != null)
+// {
+//   const querySnapshot = await getDocs(collection(db, "users")); 
+//   querySnapshot.forEach((doc) => { 
+//     if (doc.id == sessionStorage.id) { 
+//       // this.role = doc.data().role; 
+//       console.log("hello");
+
+//     } 
+//   });
+// }
+
 onAuthStateChanged(auth, (user) => {
     if (user != null) {
         uid = user.uid;
-        sessionStorage.setItem("id", uid);
+        sessionStorage.id = uid
         console.log(user.uid)
 
+        
     }
     else {
       sessionStorage.id = "";
+      sessionStorage.role = "student";
       uid = null;
     }
     
