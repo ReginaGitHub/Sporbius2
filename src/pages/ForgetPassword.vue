@@ -28,7 +28,7 @@
               <div class="pull-left">
                 <h6>
                   <router-link class="link footer-link" to="/register">
-                    <span style="font-size: small;"><span style="text-decoration:underline;">Register</span> an
+                    <span style="font-size: medium;"><span style="text-decoration:underline;">Register</span> an
                       account</span>
                   </router-link>
                 </h6>
