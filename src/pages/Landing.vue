@@ -39,18 +39,30 @@
           <div class="row">
             <div class="col-md-6">
               <div class="image-container image-left" style="background-image: url('images/LandingCard1.jpg')">
+<<<<<<< HEAD
                 <div class="img-overlay" style="padding-top: 100px; padding-left: 50px;">
                   <h1 class="title text-white">Find Coaches <br> near you</h1>
                 </div>
                 <!-- First image on the left side -->
                 <!-- <p class="blockquote blockquote-primary title">
+=======
+                <div class="img-overlay" style="padding-top: 150px; padding-left: 50px;">
+                  <h1 class="title text-white">Find Coaches <br> near you</h1>
+                </div>
+                <!-- First image on the left side -->
+                <p class="blockquote blockquote-primary title">
+>>>>>>> origin/main
                   "You believe in the long term plan but you need short term goals to motivate and
                   inspire you. Sporbius is indeed the best place that you can start learning a sport. I highly recommend
                   it."
                   <br />
                   <br />
                   - Roger Federer
+<<<<<<< HEAD
                 </p> -->
+=======
+                </p>
+>>>>>>> origin/main
               </div>
               <!-- Second image on the left side of the article -->
               <div class="image-container" style="background-image: url('images/LandingCard2.jpg')">

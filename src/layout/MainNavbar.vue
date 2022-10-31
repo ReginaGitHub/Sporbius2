@@ -4,7 +4,11 @@
     type="primary"
     :transparent="transparent"
     :color-on-scroll="colorOnScroll"
+<<<<<<< HEAD
     menu-classes="ml-auto"
+=======
+    menu-classes="ml-auto"    
+>>>>>>> origin/main
   >
     <template>
       <router-link class="navbar-brand" to="">
@@ -66,8 +70,24 @@
           <i class="now-ui-icons users_single-02"></i> Profile
         </nav-link>
       </drop-down> -->
+<<<<<<< HEAD
       <li class="nav-item">
         <router-link class="nav-link btn btn-neutral" to="/coachlanding">
+=======
+      <div>
+        <li class="nav-item"  >
+          <router-link class="nav-link btn btn-neutral"   to="studentlist">
+            <p>Student List</p>
+        </router-link>
+        </li>
+      </div>
+
+
+
+      <div v-if="sesID == ''">
+        <li class="nav-item" v-if="role == 'student'"  @click="changeRole('coach')">
+        <router-link class="nav-link btn btn-neutral"  to="/coachlanding">
+>>>>>>> origin/main
           <p>Are you a Coach?</p>
       </router-link>
         <!-- <a 
@@ -80,6 +100,16 @@
         </a> -->
       </li>
 
+<<<<<<< HEAD
+=======
+      <li class="nav-item" v-else @click="changeRole('student')" >
+          <router-link class="nav-link btn btn-neutral"   to="/">
+            <p>Are you a Student?</p>
+        </router-link>
+        </li>
+      </div>
+      
+>>>>>>> origin/main
       <li class="nav-item">
         <a
           class="nav-link"
@@ -119,6 +149,23 @@
           <p class="d-lg-none d-xl-none">Instagram</p>
         </a>
       </li>
+<<<<<<< HEAD
+=======
+      <li class="nav-item">
+          <form v-if="sesID != ''"  @click="signout">
+            <div class="nav-link btn btn-neutral"  >
+            <p>Signout</p>
+            </div>
+          </form>
+        </li>
+      <!-- <li class="nav-item">
+        <form v-if="sesID != '' || sesID != null" @click="signout">
+          <router-link class="nav-link btn btn-neutral"  to="/" >
+          <p>Signout</p>
+      </router-link>
+        </form>
+      </li> -->
+>>>>>>> origin/main
     </template>
   </navbar>
 </template>
@@ -131,22 +178,57 @@ import {
     onAuthStateChanged,sendPasswordResetEmail
 } from "firebase/auth";
 
+<<<<<<< HEAD
 var sesID = sessionStorage.id;
+=======
+>>>>>>> origin/main
 
 
 export default {
   name: 'main-navbar',
+<<<<<<< HEAD
   props: {
     transparent: Boolean,
     colorOnScroll: Number,
     sesID: sesID,
+=======
+  data() {
+    return {
+      sesID: sessionStorage.id,
+      role: sessionStorage.role
+
+    }
+  },
+  props: {
+    transparent: Boolean,
+    colorOnScroll: Number,
+>>>>>>> origin/main
   },
   components: {
     DropDown,
     Navbar,
     NavLink,
     [Popover.name]: Popover
+<<<<<<< HEAD
   }
+=======
+    },
+    methods: {
+      changeRole(roles) {
+        this.role = roles
+        sessionStorage.role = roles
+      },
+      signout() {
+        console.log(this.sesID)
+        const auth = getAuth();
+        signOut(auth).then(() => {
+          sessionStorage.id = "";
+          this.sesID = "";
+          this.$router.push({ name: 'landing' });
+        })
+      }
+    }
+>>>>>>> origin/main
 };
 
 </script>

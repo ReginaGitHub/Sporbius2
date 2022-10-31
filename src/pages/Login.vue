@@ -35,7 +35,11 @@
             <div class="pull-left">
               <h6>
                 <router-link class="link footer-link" to="/register">
+<<<<<<< HEAD
                   <span style="font-size: medium;"><span style="text-decoration:underline;">Register</span> an
+=======
+                  <span style="font-size: small;"><span style="text-decoration:underline;">Register</span> an
+>>>>>>> origin/main
                     account</span>
                 </router-link>
               </h6>
@@ -77,8 +81,27 @@ export default {
           this.$router.push({ name: "profile" });
           console.log(firebase.auth().currentUser.uid)
         }).catch((err) => {
+<<<<<<< HEAD
           this.error = true;
           this.errorMsg = "Invalid email or password. Please key in again";
+=======
+          console.log(err.code)
+          this.error = true;
+          switch (err.code) {
+            case "auth/invalid-email":
+              this.errorMsg = "Invalid email";
+              break;
+            case "auth/user-not-found":
+              this.errorMsg = "No account with the email was found";
+              break;
+            case "auth/wrong-password":
+              this.errorMsg = "Incorrect password";
+              break;
+            default:
+              this.errorMsg = "Email or password was incorrect";
+              break;
+          }
+>>>>>>> origin/main
         })
         return;
       }

@@ -5,7 +5,7 @@
         <div class="content">
             <div class="container">
                 <div class="row">
-                    <!-- <div class="col-md-6 ml-auto mr-auto">
+                    <div class="col-md-6 ml-auto mr-auto">
                         <ul class="text-left" style="list-style-type: none;">
                             <li>
                                 <h5 class="title"><i class="ri-line-chart-fill ri-xl"></i> Widens Consumer Base</h5>
@@ -20,8 +20,8 @@
                                 <p>You get to own a personal brand of yours among the sea of sports enthusiasts!</p>
                             </li>
                         </ul>
-                    </div> -->
-                    <div class="col-md-8 ml-auto mr-auto">
+                    </div>
+                    <div class="col-md-6 ml-auto mr-auto">
                         <card type="login" plain>
                             <router-link to="/coachlanding">
                                 <img v-lazy="'images/logo.png'" style="width: 280px; margin-bottom: 40px;" alt="" />
@@ -52,7 +52,7 @@
                             <div class="pull-left">
                                 <h6>
                                     <router-link class="link footer-link" to="/coachlogin">
-                                        <span style="font-size: medium;">Has an account? <span
+                                        <span style="font-size: small;">Has an account? <span
                                                 style="text-decoration:underline;">Login</span></span>
                                     </router-link>
                                 </h6>

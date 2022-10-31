@@ -1,11 +1,15 @@
 import firebase from "firebase/compat/app";
 import 'firebase/compat/firestore';
 import {initializeApp} from "firebase/app";
-
+// import { collection, doc, getDoc, getDocs } from "firebase/firestore";
+// import db from '../firebase/firebaseInit';
 import {
     getAuth, createUserWithEmailAndPassword, signOut, signInWithEmailAndPassword,
     onAuthStateChanged,sendPasswordResetEmail
 } from "firebase/auth";
+
+
+
 
 const firebaseConfig = {
   apiKey: "AIzaSyCaMNYpZsSjWvO5fgeNezjvVOdKkx3S0DI",
@@ -19,21 +23,54 @@ const firebaseConfig = {
 
 const firebaseApp = firebase.initializeApp(firebaseConfig);
 const timestamp = firebase.firestore.FieldValue.serverTimestamp;
-
 export {timestamp};
 export default firebaseApp.firestore();
+// if (user != null) {
+//   const docRef = doc(db, "user", sessionStorage.id);
+//   const docSnap = await getDoc(docRef);
+
+
+//   if (docSnap.exists()) {
+//     console.log("Document data:", docSnap.data());
+//   } else {
+//     // doc.data() will be undefined in this case
+//     console.log("No such document!");
+//   }
+// }
+
 
 const auth = getAuth();
 var uid = null;
-onAuthStateChanged(auth, (user) => {
-    if (user != null) {
-        uid = user.uid;
-        sessionStorage.setItem("id", uid);
-        console.log(user.uid)
-    }
-    else {
-      sessionStorage.clear();
+sessionStorage.setItem("id", "");
+sessionStorage.setItem("role", "student");
+sessionStorage.setItem("loggedRole", "");
+import db from '../firebase/firebaseInit'; 
+import { collection, getDocs } from "firebase/firestore"; 
+
+onAuthStateChanged(auth, async (user) => { 
+  if (user != null) { 
+      uid = user.uid;
+      sessionStorage.id = uid;
+      sessionStorage.role = "student";
+
+      const querySnapshot = await getDocs(collection(db, "users")); 
+      querySnapshot.forEach((doc) => { 
+        if (doc.id == sessionStorage.id) { 
+          var role = doc.data().role; 
+          console.log("hello this is role", role);
+          sessionStorage.loggedRole = role;
+        } 
+      });         
+      console.log(user.uid) 
+  } 
+  else { 
+      sessionStorage.id = "";
+      sessionStorage.role = "student";
+      sessionStorage.loggedRole = "";
       uid = null;
-    }
-    
+  } 
+   
 })
+
+
+

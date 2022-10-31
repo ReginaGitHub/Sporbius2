@@ -31,7 +31,7 @@
                             <div class="pull-left">
                                 <h6>
                                     <router-link class="link footer-link" to="/login">
-                                        <span style="font-size: medium;">Has an account? <span
+                                        <span style="font-size: small;">Has an account? <span
                                                 style="text-decoration:underline;">Login</span></span>
                                     </router-link>
                                 </h6>
