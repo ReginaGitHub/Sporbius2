@@ -27,5 +27,6 @@ Vue.use(NowUiKit);
 
 new Vue({
   router,
+  sesID: sessionStorage.id,
   render: h => h(App)
 }).$mount('#app');
