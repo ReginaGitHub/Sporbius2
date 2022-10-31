@@ -43,32 +43,34 @@ const auth = getAuth();
 var uid = null;
 sessionStorage.setItem("id", "");
 sessionStorage.setItem("role", "student");
+sessionStorage.setItem("loggedRole", "");
+import db from '../firebase/firebaseInit'; 
+import { collection, getDocs } from "firebase/firestore"; 
 
+onAuthStateChanged(auth, async (user) => { 
+  if (user != null) { 
+      uid = user.uid;
+      sessionStorage.id = uid;
+      sessionStorage.role = "student";
 
-// if (uid != null)
-// {
-//   const querySnapshot = await getDocs(collection(db, "users")); 
-//   querySnapshot.forEach((doc) => { 
-//     if (doc.id == sessionStorage.id) { 
-//       // this.role = doc.data().role; 
-//       console.log("hello");
-
-//     } 
-//   });
-// }
-
-onAuthStateChanged(auth, (user) => {
-    if (user != null) {
-        uid = user.uid;
-        sessionStorage.id = uid
-        console.log(user.uid)
-
-        
-    }
-    else {
+      const querySnapshot = await getDocs(collection(db, "users")); 
+      querySnapshot.forEach((doc) => { 
+        if (doc.id == sessionStorage.id) { 
+          var role = doc.data().role; 
+          console.log("hello this is role", role);
+          sessionStorage.loggedRole = role;
+        } 
+      });         
+      console.log(user.uid) 
+  } 
+  else { 
       sessionStorage.id = "";
       sessionStorage.role = "student";
+      sessionStorage.loggedRole = "";
       uid = null;
-    }
-    
+  } 
+   
 })
+
+
+

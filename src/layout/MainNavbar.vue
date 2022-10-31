@@ -66,6 +66,16 @@
           <i class="now-ui-icons users_single-02"></i> Profile
         </nav-link>
       </drop-down> -->
+      <div>
+        <li class="nav-item"  >
+          <router-link class="nav-link btn btn-neutral"   to="studentlist">
+            <p>Student List</p>
+        </router-link>
+        </li>
+      </div>
+
+
+
       <div v-if="sesID == ''">
         <li class="nav-item" v-if="role == 'student'"  @click="changeRole('coach')">
         <router-link class="nav-link btn btn-neutral"  to="/coachlanding">
