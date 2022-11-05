@@ -50,23 +50,23 @@ import { collection, getDocs } from "firebase/firestore";
 onAuthStateChanged(auth, async (user) => { 
   if (user != null) { 
       uid = user.uid;
-      sessionStorage.id = uid;
-      sessionStorage.role = "student";
+      sessionStorage.setItem("id", uid);
+      sessionStorage.setItem("role", "student");
 
       const querySnapshot = await getDocs(collection(db, "users")); 
       querySnapshot.forEach((doc) => { 
-        if (doc.id == sessionStorage.id) { 
+        if (doc.id == sessionStorage.getItem("id")) { 
           var role = doc.data().role; 
           console.log("hello this is role", role);
-          sessionStorage.loggedRole = role;
+          sessionStorage.setItem("loggedRole", role);
         } 
       });         
       console.log(user.uid) 
   } 
   else { 
-      sessionStorage.id = "";
-      sessionStorage.role = "student";
-      sessionStorage.loggedRole = "";
+    sessionStorage.setItem("id", "");
+    sessionStorage.setItem("role", "student");
+    sessionStorage.setItem("loggedRole", "");
       uid = null;
   } 
    

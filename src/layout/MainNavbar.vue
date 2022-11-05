@@ -1,15 +1,6 @@
 <template>
-  <navbar
-    position="fixed"
-    type="primary"
-    :transparent="transparent"
-    :color-on-scroll="colorOnScroll"
-<<<<<<< HEAD
-    menu-classes="ml-auto"
-=======
-    menu-classes="ml-auto"    
->>>>>>> origin/main
-  >
+  <navbar position="fixed" type="primary" :transparent="transparent" :color-on-scroll="colorOnScroll"
+    menu-classes="ml-auto">
     <template>
       <router-link class="navbar-brand" to="">
         <img v-lazy="'images/logo.png'" style="width: 180px;" alt="" />
@@ -70,27 +61,22 @@
           <i class="now-ui-icons users_single-02"></i> Profile
         </nav-link>
       </drop-down> -->
-<<<<<<< HEAD
-      <li class="nav-item">
-        <router-link class="nav-link btn btn-neutral" to="/coachlanding">
-=======
       <div>
-        <li class="nav-item"  >
-          <router-link class="nav-link btn btn-neutral"   to="studentlist">
+        <li class="nav-item">
+          <router-link class="nav-link btn btn-neutral" to="studentlist">
             <p>Student List</p>
-        </router-link>
+          </router-link>
         </li>
       </div>
 
 
 
       <div v-if="sesID == ''">
-        <li class="nav-item" v-if="role == 'student'"  @click="changeRole('coach')">
-        <router-link class="nav-link btn btn-neutral"  to="/coachlanding">
->>>>>>> origin/main
-          <p>Are you a Coach?</p>
-      </router-link>
-        <!-- <a 
+        <li class="nav-item" v-if="role == 'student'" @click="changeRole('coach')">
+          <router-link class="nav-link btn btn-neutral" to="/coachlanding">
+            <p>Are you a Coach?</p>
+          </router-link>
+          <!-- <a 
           class="nav-link btn btn-primary"
           href="https://www.creative-tim.com/product/vue-now-ui-kit-pro"
           target="_blank"
@@ -98,66 +84,43 @@
           <i class="now-ui-icons arrows-1_share-66"></i>
           <p>Login</p>
         </a> -->
-      </li>
+        </li>
 
-<<<<<<< HEAD
-=======
-      <li class="nav-item" v-else @click="changeRole('student')" >
-          <router-link class="nav-link btn btn-neutral"   to="/">
+        <li class="nav-item" v-else @click="changeRole('student')">
+          <router-link class="nav-link btn btn-neutral" to="/">
             <p>Are you a Student?</p>
-        </router-link>
+          </router-link>
         </li>
       </div>
-      
->>>>>>> origin/main
+
       <li class="nav-item">
-        <a
-          class="nav-link"
-          rel="tooltip"
-          title="Follow us on Twitter"
-          data-placement="bottom"
-          href="https://twitter.com/CreativeTim"
-          target="_blank"
-        >
+        <a class="nav-link" rel="tooltip" title="Follow us on Twitter" data-placement="bottom"
+          href="https://twitter.com/CreativeTim" target="_blank">
           <i class="fab fa-twitter"></i>
           <p class="d-lg-none d-xl-none">Twitter</p>
         </a>
       </li>
       <li class="nav-item">
-        <a
-          class="nav-link"
-          rel="tooltip"
-          title="Like us on Facebook"
-          data-placement="bottom"
-          href="https://www.facebook.com/CreativeTim"
-          target="_blank"
-        >
+        <a class="nav-link" rel="tooltip" title="Like us on Facebook" data-placement="bottom"
+          href="https://www.facebook.com/CreativeTim" target="_blank">
           <i class="fab fa-facebook-square"></i>
           <p class="d-lg-none d-xl-none">Facebook</p>
         </a>
       </li>
       <li class="nav-item">
-        <a
-          class="nav-link"
-          rel="tooltip"
-          title="Follow us on Instagram"
-          data-placement="bottom"
-          href="https://www.instagram.com/CreativeTimOfficial"
-          target="_blank"
-        >
+        <a class="nav-link" rel="tooltip" title="Follow us on Instagram" data-placement="bottom"
+          href="https://www.instagram.com/CreativeTimOfficial" target="_blank">
           <i class="fab fa-instagram"></i>
           <p class="d-lg-none d-xl-none">Instagram</p>
         </a>
       </li>
-<<<<<<< HEAD
-=======
       <li class="nav-item">
-          <form v-if="sesID != ''"  @click="signout">
-            <div class="nav-link btn btn-neutral"  >
+        <form v-if="sesID != ''" @click="signout">
+          <div class="nav-link btn btn-neutral">
             <p>Signout</p>
-            </div>
-          </form>
-        </li>
+          </div>
+        </form>
+      </li>
       <!-- <li class="nav-item">
         <form v-if="sesID != '' || sesID != null" @click="signout">
           <router-link class="nav-link btn btn-neutral"  to="/" >
@@ -165,7 +128,6 @@
       </router-link>
         </form>
       </li> -->
->>>>>>> origin/main
     </template>
   </navbar>
 </template>
@@ -174,24 +136,14 @@
 import { DropDown, Navbar, NavLink } from '@/components';
 import { Popover } from 'element-ui';
 import {
-    getAuth, createUserWithEmailAndPassword, signOut, signInWithEmailAndPassword,
-    onAuthStateChanged,sendPasswordResetEmail
+  getAuth, createUserWithEmailAndPassword, signOut, signInWithEmailAndPassword,
+  onAuthStateChanged, sendPasswordResetEmail
 } from "firebase/auth";
 
-<<<<<<< HEAD
-var sesID = sessionStorage.id;
-=======
->>>>>>> origin/main
 
 
 export default {
   name: 'main-navbar',
-<<<<<<< HEAD
-  props: {
-    transparent: Boolean,
-    colorOnScroll: Number,
-    sesID: sesID,
-=======
   data() {
     return {
       sesID: sessionStorage.id,
@@ -202,35 +154,32 @@ export default {
   props: {
     transparent: Boolean,
     colorOnScroll: Number,
->>>>>>> origin/main
   },
   components: {
     DropDown,
     Navbar,
     NavLink,
     [Popover.name]: Popover
-<<<<<<< HEAD
-  }
-=======
+  },
+  methods: {
+    changeRole(roles) {
+      this.role = roles
+      sessionStorage.role = roles
     },
-    methods: {
-      changeRole(roles) {
-        this.role = roles
-        sessionStorage.role = roles
-      },
-      signout() {
-        console.log(this.sesID)
-        const auth = getAuth();
-        signOut(auth).then(() => {
-          sessionStorage.id = "";
-          this.sesID = "";
-          this.$router.push({ name: 'landing' });
-        })
-      }
+    signout() {
+      console.log(this.sesID)
+      const auth = getAuth();
+      signOut(auth).then(() => {
+        sessionStorage.id = "";
+        this.sesID = "";
+        this.$router.push({ name: 'landing' });
+      })
     }
->>>>>>> origin/main
+  }
 };
 
 </script>
 
-<style scoped></style>
+<style scoped>
+
+</style>
