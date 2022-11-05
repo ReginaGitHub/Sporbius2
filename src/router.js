@@ -10,6 +10,7 @@ import CoachLogin from './pages/CoachLogin.vue';
 import CoachRegister from './pages/CoachRegister.vue';
 import ForgetPassword from './pages/ForgetPassword.vue';
 import StudentList from "./pages/StudentList.vue";
+import CoachList from "./pages/CoachList.vue";
 import MainNavbar from './layout/MainNavbar.vue';
 import MainFooter from './layout/MainFooter.vue';
 import CoachLandingNavbar from './layout/CoachLandingNavbar.vue';
@@ -114,6 +115,14 @@ const router = new Router({
         header: { colorOnScroll: 400 },
       }
     },
+    {
+      path: '/coachlist',
+      name: 'coachlist',
+      components: { default: CoachList, header: MainNavbar, footer: MainFooter },
+      props: {
+        header: { colorOnScroll: 400 },
+      }
+    }
   ],
   scrollBehavior: to => {
     if (to.hash) {

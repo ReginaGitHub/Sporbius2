@@ -1211,6 +1211,8 @@ export default {
 
     const querySnapshot = await getDocs(collection(db, "users"));
     querySnapshot.forEach((doc) => {
+
+      
       if (doc.id == sessionStorage.id) {
         this.nameOfUser = doc.data().name;
         this.role = doc.data().role;
