@@ -61,13 +61,31 @@
           <i class="now-ui-icons users_single-02"></i> Profile
         </nav-link>
       </drop-down> -->
-      <div>
-        <li class="nav-item">
+      <div v-if="loggedRole != ''" style="margin-right:5px">
+        <div v-if="loggedRole == 'coach'">
+          <li class="nav-item">
           <router-link class="nav-link btn btn-neutral" to="studentlist">
             <p>Student List</p>
           </router-link>
         </li>
+        </div>
+        <div v-if="loggedRole == 'student'">
+          <li class="nav-item">
+          <router-link class="nav-link btn btn-neutral" to="coachlist">
+            <p>Coach</p>
+          </router-link>
+        </li>
+        </div>
+
+        
       </div>
+      <div v-if="loggedRole != ''">
+          <li class="nav-item">
+          <router-link class="nav-link btn btn-neutral" to="profile">
+            <p>Profile</p>
+          </router-link>
+        </li>
+        </div>
 
 
 
@@ -144,12 +162,23 @@ import {
 
 export default {
   name: 'main-navbar',
+
   data() {
     return {
       sesID: sessionStorage.id,
-      role: sessionStorage.role
+      role: sessionStorage.role,
+      loggedRole: sessionStorage.loggedRole,
 
     }
+  },
+  mounted() {
+    this.loggedRole = sessionStorage.loggedRole;
+    this.role = sessionStorage.role;
+    this.sesID = sessionStorage.id;
+
+
+
+    
   },
   props: {
     transparent: Boolean,
@@ -171,7 +200,9 @@ export default {
       const auth = getAuth();
       signOut(auth).then(() => {
         sessionStorage.id = "";
+        sessionStorage.loggedRole = "",
         this.sesID = "";
+        this.loggedRole = "";
         this.$router.push({ name: 'landing' });
       })
     }
@@ -183,3 +214,4 @@ export default {
 <style scoped>
 
 </style>
+
