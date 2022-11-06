@@ -221,7 +221,7 @@ export default {
 
     },
     async created() {
-        if (sessionStorage.getItem("id") === '') {
+        if (localStorage.getItem("id") === '') {
             this.$router.push({ name: 'landing' });
         }
 

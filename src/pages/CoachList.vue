@@ -71,35 +71,10 @@ export default {
 
     },
     async created() {
-        if (sessionStorage.getItem("id") === '') {
+        if (localStorage.getItem("id") === '') {
             this.$router.push({ name: 'landing' });
-
-            // const router = new Router({
-            //     routes: [
-            //         {
-            //             path: '/',
-            //             name: 'landing',
-            //             components: { default: Landing, header: MainNavbar, footer: MainFooter },
-            //             props: {
-            //                 header: { colorOnScroll: 400 },
-            //                 footer: { backgroundColor: 'black' }
-            //             }
-            //         },
-
-
-            //     ],
-            //     scrollBehavior: to => {
-            //         if (to.hash) {
-            //             return { selector: to.hash };
-            //         } else {
-            //             return { x: 0, y: 0 };
-            //         }
-            //     }
-            // });
-
-            // this.$router.push({ name: 'landing' });
         }
-
+        console.log(localStorage.getItem("id"))
         const querySnapshot = await getDocs(collection(db, "users"));
         querySnapshot.forEach((doc) => {
             console.log(doc)
