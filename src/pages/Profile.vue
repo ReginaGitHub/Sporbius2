@@ -34,14 +34,14 @@
           <div v-if="uploadedCoverPhoto === '' && uploadedProfilePhoto === ''">
             <!-- Button trigger modal -->
             <div type="button" class="btn btn-primary btn-lg" data-bs-toggle="modal"
-              data-bs-target="#staticBackdropAddProfilePicAndCoverPageID" v-on:click="">
+              data-bs-target="#staticBackdropAddProfilePicAndCoverPageID">
               <i class="ri-add-line ri-lg"></i> Add Profile Picture & Cover Photo
             </div>
           </div>
           <div v-else>
             <!-- Button trigger modal -->
             <div type="button" class="btn btn-primary btn-lg" data-bs-toggle="modal"
-              data-bs-target="#staticBackdropAddProfilePicAndCoverPageID" v-on:click="">
+              data-bs-target="#staticBackdropAddProfilePicAndCoverPageID">
               <i class="ri-edit-box-line ri-lg"></i> Edit Profile Picture & Cover Photo
             </div>
           </div>
@@ -1212,7 +1212,7 @@ export default {
     const querySnapshot = await getDocs(collection(db, "users"));
     querySnapshot.forEach((doc) => {
 
-      
+
       if (doc.id == sessionStorage.id) {
         this.nameOfUser = doc.data().name;
         this.role = doc.data().role;

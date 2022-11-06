@@ -21,15 +21,18 @@
               <div class="pull-right">
                 <h6>
                   <router-link class="link footer-link" to="/forgetpassword">
-                    <span style="font-size: medium; text-decoration: underline;">Forgot Password?</span>
+                    <span style="font-size: small; text-decoration: underline;">Forgot Password?</span>
                   </router-link>
                 </h6>
               </div>
               <div v-show="error" class="error"
                 style="text-align: center; font-size:large; color: red;display:inline-block;">{{
-    this.errorMsg
+                    this.errorMsg
                 }}</div>
               <div class="card-footer text-center">
+                <vue-recaptcha :sitekey="site" @verify="verify"></vue-recaptcha>
+                <label class="card-title label form-label" v-if="!recaptcha" style="color: red;">
+                  Not yet verified </label><br>
                 <button class="btn btn-primary btn-round btn-lg btn-block">Login</button>
               </div>
               <div class="pull-left">
@@ -57,6 +60,7 @@ import 'firebase/compat/auth';
 import db from '../firebase/firebaseInit';
 import { setPersistence, browserSessionPersistence, getAuth } from '@firebase/auth';
 import { constants } from 'buffer';
+import { VueRecaptcha } from 'vue-recaptcha';
 
 
 export default {
@@ -65,16 +69,25 @@ export default {
   data() {
     return {
       loading: null,
-      email: null,
-      password: null,
+      email: "",
+      password: "",
       error: null,
       errorMsg: null,
+      site: "6LdTrc4iAAAAAJz9uQiJsYFDrXv8-FknOl4O7OAM",
+      recaptcha: null,
     };
   },
   methods: {
     async login() {
       const auth = getAuth();
-      if (this.email !== "" && this.password !== "" && this.email !== null && this.password !== null) {
+      if (this.email === "" || this.password === "") {
+        this.error = true;
+        this.errorMsg = "Please fill in all the fields!";
+      }
+      else if (this.recaptcha === null){
+        this.errorMsg = '';
+      }
+      else if (this.email !== "" && this.password !== "" && this.email !== null && this.password !== null && this.recaptcha !== null) {
         setPersistence(auth, browserSessionPersistence)
           .then(() => {
             return firebase.auth().signInWithEmailAndPassword(this.email, this.password).then(() => {
@@ -94,7 +107,7 @@ export default {
                   this.errorMsg = "No account with the email was found";
                   break;
                 case "auth/wrong-password":
-                  this.errorMsg = "Incorrect password";
+                  this.errorMsg = "Email or password was incorrect";
                   break;
                 default:
                   this.errorMsg = "Email or password was incorrect";
@@ -105,21 +118,26 @@ export default {
           .catch((error) => {
             // Handle Errors here.
             this.error = true;
-            this.errorMsg = "Please fill out all the fields!";
+            this.errorMsg = "Please fill in all the fields!";
           });
 
 
         return;
       }
 
-    }
+    },
+    verify(response) {
+
+      this.recaptcha = response;
+    },
   },
   components: {
     Card,
     MainFooter,
     Loading,
     [Button.name]: Button,
-    [FormGroupInput.name]: FormGroupInput
+    [FormGroupInput.name]: FormGroupInput,
+    VueRecaptcha,
   }
 };
 </script>
