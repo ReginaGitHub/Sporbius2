@@ -34,14 +34,14 @@
           <div v-if="uploadedCoverPhoto === '' && uploadedProfilePhoto === ''">
             <!-- Button trigger modal -->
             <div type="button" class="btn btn-primary btn-lg" data-bs-toggle="modal"
-              data-bs-target="#staticBackdropAddProfilePicAndCoverPageID">
+              data-bs-target="#staticBackdropAddProfilePicAndCoverPageID" v-on:click="">
               <i class="ri-add-line ri-lg"></i> Add Profile Picture & Cover Photo
             </div>
           </div>
           <div v-else>
             <!-- Button trigger modal -->
             <div type="button" class="btn btn-primary btn-lg" data-bs-toggle="modal"
-              data-bs-target="#staticBackdropAddProfilePicAndCoverPageID">
+              data-bs-target="#staticBackdropAddProfilePicAndCoverPageID" v-on:click="">
               <i class="ri-edit-box-line ri-lg"></i> Edit Profile Picture & Cover Photo
             </div>
           </div>
@@ -154,6 +154,11 @@
                       <h5 class="card-text">{{ activity.starttime }} - {{ activity.endtime }}</h5>
                       <h5 class="card-title fw-bold my-3">Price</h5>
                       <h5 class="card-text">SGD ${{ activity.price }}/hr</h5>
+                      <h5 class="card-title fw-bold my-3"
+                        v-if="activity.participants != undefined && activity.participants.length !== 0">Participants
+                      </h5>
+                      <h5 class="card-text" v-for="participant in activity.participants">{{ participant }}
+                      </h5>
                       <!-- Button trigger modal -->
                       <div type="button" class="btn btn-primary btn-block btn-lg" data-bs-toggle="modal"
                         data-bs-target="#staticBackdropEditTrainingDetailsID" v-on:click="editTrainingDetails(idx)">
@@ -241,7 +246,10 @@
                   <video v-bind:src="uploadedVideo" width="350" controls></video>
                 </div>
                 <div class="text-right">
-                  <h4 class="text-warning title float-end">{{ videoApproval }}</h4>
+                  <h4 class="text-warning title float-end" v-if="videoApproval == 'Pending Approval'">{{ videoApproval
+                  }}</h4>
+                  <h4 class="text-success title float-end" v-if="videoApproval == 'Approved'">{{ videoApproval }}</h4>
+                  <h4 class="text-danger title float-end" v-if="videoApproval == 'Disapproved'">{{ videoApproval }}</h4>
                 </div>
               </div>
 
@@ -1178,14 +1186,39 @@ export default {
 
   async created() {
     if (localStorage.getItem("id") === '') {
-      this.$router.push({ name: 'landing' });
+
+      const router = new Router({
+        routes: [
+          {
+            path: '/',
+            name: 'landing',
+            components: { default: Landing, header: MainNavbar, footer: MainFooter },
+            props: {
+              header: { colorOnScroll: 400 },
+              footer: { backgroundColor: 'black' }
+            }
+          },
+
+
+        ],
+        scrollBehavior: to => {
+          if (to.hash) {
+            return { selector: to.hash };
+          } else {
+            return { x: 0, y: 0 };
+          }
+        }
+      });
+
+      // this.$router.push({ name: 'landing' });
+
+      console.log(localStorage)
+
     }
     console.log(localStorage)
 
     const querySnapshot = await getDocs(collection(db, "users"));
     querySnapshot.forEach((doc) => {
-
-
       if (doc.id == sessionStorage.id) {
         this.nameOfUser = doc.data().name;
         this.role = doc.data().role;

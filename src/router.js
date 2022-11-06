@@ -4,6 +4,7 @@ import Index from './pages/Index.vue';
 import Landing from './pages/Landing.vue';
 import Login from './pages/Login.vue';
 import Profile from './pages/Profile.vue';
+import ViewProfile from './pages/ViewProfile.vue';
 import Register from './pages/Register.vue'
 import CoachLanding from './pages/CoachLanding.vue';
 import CoachLogin from './pages/CoachLogin.vue';
@@ -119,6 +120,14 @@ const router = new Router({
       path: '/coachlist',
       name: 'coachlist',
       components: { default: CoachList, header: MainNavbar, footer: MainFooter },
+      props: {
+        header: { colorOnScroll: 400 },
+      }
+    },
+    {
+      path: '/viewprofile',
+      name: 'viewprofile',
+      components: { default: ViewProfile, header: MainNavbar, footer: MainFooter },
       props: {
         header: { colorOnScroll: 400 },
       }
