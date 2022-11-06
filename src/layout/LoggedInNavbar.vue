@@ -68,6 +68,13 @@
           </router-link>
         </li>
       </div>
+      <div style="margin-right:5px;">
+        <li class="nav-item">
+          <router-link class="nav-link btn btn-neutral" to="studentlist">
+            <p>Student List</p>
+          </router-link>
+        </li>
+      </div>
       <div>
         <li class="nav-item">
           <router-link class="nav-link btn btn-neutral" to="profile">
