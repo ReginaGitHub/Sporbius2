@@ -63,8 +63,8 @@
       </drop-down> -->
       <div style="margin-right:5px;">
         <li class="nav-item">
-          <router-link class="nav-link btn btn-neutral" to="studentlist">
-            <p>Student List</p>
+          <router-link class="nav-link btn btn-neutral" to="coachlist">
+            <p>Coach List</p>
           </router-link>
         </li>
       </div>
