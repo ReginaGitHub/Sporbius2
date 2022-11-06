@@ -196,6 +196,11 @@
 </template>
 <script>
 import { Button, FormGroupInput } from '@/components';
+import firebase from 'firebase/compat/app';
+import 'firebase/compat/auth';
+import db from '../firebase/firebaseInit';
+import { collection, getDocs, updateDoc } from "firebase/firestore";
+
 export default {
     name: 'studentlist',
     bodyClass: 'landing-page',
@@ -211,7 +216,23 @@ export default {
                 message: ''
             }
         };
+    },
+    methods: {
+
+    },
+    async created() {
+        if (sessionStorage.getItem("id") === '') {
+            this.$router.push({ name: 'landing' });
+        }
+
+        const querySnapshot = await getDocs(collection(db, "users"));
+        querySnapshot.forEach((doc) => {
+            console.log(doc)
+        });
+
+
     }
+
 };
 </script>
 <style>
