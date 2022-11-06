@@ -61,15 +61,24 @@
           <i class="now-ui-icons users_single-02"></i> Profile
         </nav-link>
       </drop-down> -->
-
-
-
-
-      <div v-if="sesID == ''">
-        <li class="nav-item" v-if="role == 'student'" @click="changeRole('coach')">
-          <router-link class="nav-link btn btn-neutral" to="/coachlanding">
-            <p>Are you a Coach?</p>
+      <div style="margin-right:5px;">
+        <li class="nav-item">
+          <router-link class="nav-link btn btn-neutral" to="coachlist">
+            <p>Coach List</p>
           </router-link>
+        </li>
+      </div>
+      <div>
+        <li class="nav-item">
+          <router-link class="nav-link btn btn-neutral" to="profile">
+            <p>Profile</p>
+          </router-link>
+        </li>
+      </div>
+
+
+
+
           <!-- <a 
           class="nav-link btn btn-primary"
           href="https://www.creative-tim.com/product/vue-now-ui-kit-pro"
@@ -78,14 +87,7 @@
           <i class="now-ui-icons arrows-1_share-66"></i>
           <p>Login</p>
         </a> -->
-        </li>
 
-        <li class="nav-item" v-else @click="changeRole('student')">
-          <router-link class="nav-link btn btn-neutral" to="/">
-            <p>Are you a Student?</p>
-          </router-link>
-        </li>
-      </div>
 
       <li class="nav-item">
         <a class="nav-link" rel="tooltip" title="Follow us on Twitter" data-placement="bottom"
@@ -108,7 +110,13 @@
           <p class="d-lg-none d-xl-none">Instagram</p>
         </a>
       </li>
-
+      <li class="nav-item">
+        <form @click="signout">
+          <div class="nav-link btn btn-neutral">
+            <p>Signout</p>
+          </div>
+        </form>
+      </li>
       <!-- <li class="nav-item">
         <form v-if="sesID != '' || sesID != null" @click="signout">
           <router-link class="nav-link btn btn-neutral"  to="/" >
@@ -135,7 +143,8 @@ export default {
   data() {
     return {
       sesID: sessionStorage.id,
-      role: sessionStorage.role
+      role: sessionStorage.role,
+      loggedRole: sessionStorage.loggedRole,
 
     }
   },
@@ -159,7 +168,9 @@ export default {
       const auth = getAuth();
       signOut(auth).then(() => {
         sessionStorage.id = "";
+        sessionStorage.loggedRole = "";
         this.sesID = "";
+        this.loggedRole = "";
         this.$router.push({ name: 'landing' });
       })
     }
