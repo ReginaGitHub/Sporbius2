@@ -248,12 +248,7 @@ export default {
 
         },
         async approved(idx) {
-            var profile = this.listofprofiles[idx];
-            profile.videoApproved = "Approved"
-            this.$set(this.listofprofiles, idx, profile)
-
-            console.log(this.listofprofiles)
-            // this.listofprofiles[idx].videoApproval = "Approved";
+            this.listofprofiles[idx].videoApproved = "Approved"
 
             db.collection("users").doc(this.listofprofilesIDs[idx]).update({
                 videoApproved: "Approved"
