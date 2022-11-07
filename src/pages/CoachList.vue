@@ -1,7 +1,7 @@
 <template>
     <div>
         <div class="page-header page-header-small clear-filter" filter-color="black">
-            <parallax class="page-header-image" style="background-image: url('images/CoachLandingWallpaper.jpg')">
+            <parallax class="page-header-image" style="background-image: url('images/CoachLand.jpg')">
             </parallax>
             <div class="content-center">
                 <div class="container">

@@ -16,6 +16,9 @@ import MainNavbar from './layout/MainNavbar.vue';
 import MainFooter from './layout/MainFooter.vue';
 import LoggedInNavbar from './layout/LoggedInNavbar.vue';
 import CoachLandingNavbar from './layout/CoachLandingNavbar.vue';
+import AdminList from './pages/AdminList.vue';
+import AdminNavBar from './layout/AdminNavbar.vue';
+
 
 
 Vue.use(Router);
@@ -60,7 +63,6 @@ const router = new Router({
       },
       props: {
         header: { colorOnScroll: 400 },
-        footer: { backgroundColor: 'black' }
       }
     },
     {
@@ -72,7 +74,6 @@ const router = new Router({
       },
       props: {
         header: { colorOnScroll: 400 },
-        footer: { backgroundColor: 'black' }
       }
     },
     {
@@ -121,6 +122,14 @@ const router = new Router({
       path: '/coachlist',
       name: 'coachlist',
       components: { default: CoachList, header: LoggedInNavbar, footer: MainFooter },
+      props: {
+        header: { colorOnScroll: 400 },
+      }
+    },
+    {
+      path: '/adminlist',
+      name: 'adminlist',
+      components: { default: AdminList, header: AdminNavBar, footer: MainFooter },
       props: {
         header: { colorOnScroll: 400 },
       }
