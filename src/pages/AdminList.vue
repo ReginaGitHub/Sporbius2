@@ -14,121 +14,25 @@
         <div class="container">
             <div class="section">
                 <div class="text-center">
-                    <button class="btn btn-primary float-start" type="button" data-bs-toggle="collapse" data-bs-target="#collapseExample" aria-expanded="false" aria-controls="collapseExample">
+                    <button class="btn btn-primary float-start" type="button" data-bs-toggle="collapse"
+                        data-bs-target="#collapseExample" aria-expanded="false" aria-controls="collapseExample">
                         Pending Approval
                     </button>
-                    <button class="btn btn-primary " type="button" data-bs-toggle="collapse" data-bs-target="#collapseExample2" aria-expanded="false" aria-controls="collapseExample">
-                        Disapproved Videos
-                    </button>
-                    <button class="btn btn-primary float-end" type="button" data-bs-toggle="collapse" data-bs-target="#collapseExample3" aria-expanded="false" aria-controls="collapseExample">
+                    <button class="btn btn-primary " type="button" data-bs-toggle="collapse"
+                        data-bs-target="#collapseExample2" aria-expanded="false" aria-controls="collapseExample">
                         Approved Videos
+                    </button>
+                    <button class="btn btn-primary float-end" type="button" data-bs-toggle="collapse"
+                        data-bs-target="#collapseExample3" aria-expanded="false" aria-controls="collapseExample">
+                        Disapproved Videos
                     </button>
                     <div class="collapse" id="collapseExample">
                         <div class="card card-body">
                             <div class="row">
                                 <h4 class="title text-center">Pending Approval</h4>
-                                <div class="col-md-4" v-for="(profile, idx) in listofprofiles"
-                                    v-if="profile.videoApproved != undefined && profile.role == 'coach' && profile.videoApproved == 'Pending Approval'">
-                                    <div class="card card-plain card-blog">
-                                        <div class="card-image text-center ">
-                                            <img v-if="profile.profilephoto == undefined || profile.profilephoto == ''"
-                                                src="images/noProfilePic.jpg" width="60%" alt="Thumbnail Image"
-                                                class="rounded-circle img-fluid img-raised" />
-                                            <img v-if="profile.profilephoto != undefined && profile.profilephoto != ''"
-                                                v-bind:src="profile.profilephoto" width="60%" alt="Thumbnail Image"
-                                                class="rounded-circle img-fluid img-raised" />
-                                        </div>
-                                    <div class="card-body">
-                                        <h4 class="title text-center">{{ profile.name }}</h4>
-                                        <h5>
-                                            {{ profile.aboutme }}
-                                        </h5>
-                                        <div>
-                                            <h4 class="title p-0">Sports:
-                                                <button class="btn btn-info btn-sm" v-for="c in profile.sports" disabled>{{ c
-                                                }}</button>
-                                            </h4>
-                                        </div>
-                                        <div class="text-center">
-                                            <video v-bind:src="profile.video" class="w-100" controls></video>
-                                        </div>
-                                        <div class="container-fluid">
-                                            <div class="row justify-content-center text-center">
-                                                <div class="col w-100 justify-content-center text-center">
-                                                    <button class="btn btn-danger w-100 btn-block " v-on:click="disapproved(idx)">Disapproved</button>
+                                <div class="col-md-4" v-for="(profile, idx) in listofprofiles" v-bind:key="idx"
+                                    v-if="profile.videoApproved !== undefined && profile.role === 'coach' && profile.videoApproved === 'Pending Approval'">
 
-                                                </div>
-                                                <div class="col w-100 justify-content-center text-center">                                        
-                                                    <button class="btn btn-success w-100 btn-block" v-on:click="approved(idx)">Approved</button>
-
-                                                </div>
-
-                                            </div>
-                                            <div class="author">
-                                            <button class="btn btn-primary btn-lg btn-block" v-on:click="viewprofile(idx)">View
-                                                Profile</button>
-                                            </div>
-                                        </div>
-                                    </div>
-                                    </div>
-                                </div>
-                            </div>
-                        </div>
-                    </div>
-                    <div class="collapse" id="collapseExample2">
-                        <div class="card card-body">
-                            <div class="row">
-                                <h4 class="title text-center">Disapproved</h4>
-                                <div class="col-md-4" v-for="(profile, idx) in listofprofiles"
-                                    v-if="profile.videoApproved != undefined && profile.role == 'coach' && profile.videoApproved == 'Disapproved'">
-                                    <div class="card card-plain card-blog">
-                                        <div class="card-image text-center ">
-                                            <img v-if="profile.profilephoto == undefined || profile.profilephoto == ''"
-                                                src="images/noProfilePic.jpg" width="60%" alt="Thumbnail Image"
-                                                class="rounded-circle img-fluid img-raised" />
-                                            <img v-if="profile.profilephoto != undefined && profile.profilephoto != ''"
-                                                v-bind:src="profile.profilephoto" width="60%" alt="Thumbnail Image"
-                                                class="rounded-circle img-fluid img-raised" />
-                                        </div>
-                                    <div class="card-body">
-                                        <h4 class="title text-center">{{ profile.name }}</h4>
-                                        <h5>
-                                            {{ profile.aboutme }}
-                                        </h5>
-                                        <div>
-                                            <h4 class="title p-0">Sports:
-                                                <button class="btn btn-info btn-sm" v-for="c in profile.sports" disabled>{{ c
-                                                }}</button>
-                                            </h4>
-                                        </div>
-                                        <div class="text-center">
-                                            <video v-bind:src="profile.video" class="w-100" controls></video>
-                                        </div>
-                                        <div class="container-fluid">
-                                            <div class="row justify-content-center text-center">
-                                                <div class="col w-100 justify-content-center text-center">                                        
-                                                    <button class="btn btn-success w-100 btn-block" v-on:click="approved(idx)">Approved</button>
-
-                                                </div>
-
-                                            </div>
-                                            <div class="author">
-                                            <button class="btn btn-primary btn-lg btn-block" v-on:click="viewprofile(idx)">View
-                                                Profile</button>
-                                        </div>
-                                        </div>
-                                    </div>
-                                    </div>
-                                </div>
-                            </div>
-                        </div>
-                    </div>
-                    <div class="collapse" id="collapseExample3">
-                        <div class="card card-body">
-                            <div class="row">
-                                <h4 class="title text-center">Approved</h4>
-                                <div class="col-md-4" v-for="(profile, idx) in listofprofiles"
-                                    v-if="profile.videoApproved != undefined && profile.role == 'coach' && profile.videoApproved == 'Approved'">
                                     <div class="card card-plain card-blog">
                                         <div class="card-image text-center ">
                                             <img v-if="profile.profilephoto == undefined || profile.profilephoto == ''"
@@ -145,8 +49,9 @@
                                             </h5>
                                             <div>
                                                 <h4 class="title p-0">Sports:
-                                                    <button class="btn btn-info btn-sm" v-for="c in profile.sports" disabled>{{ c
-                                                    }}</button>
+                                                    <button class="btn btn-info btn-sm" v-for="c in profile.sports"
+                                                        disabled>{{ c
+                                                        }}</button>
                                                 </h4>
                                             </div>
                                             <div class="text-center">
@@ -155,13 +60,126 @@
                                             <div class="container-fluid">
                                                 <div class="row justify-content-center text-center">
                                                     <div class="col w-100 justify-content-center text-center">
-                                                        <button class="btn btn-danger w-100 btn-block " v-on:click="disapproved(idx)">Disapproved</button>
+                                                        <button class="btn btn-danger w-100 btn-block "
+                                                            v-on:click="disapproved(idx)">Disapproved</button>
+
                                                     </div>
+                                                    <div class="col w-100 justify-content-center text-center">
+                                                        <button class="btn btn-success w-100 btn-block"
+                                                            v-on:click="approved(idx)">Approved</button>
+
+                                                    </div>
+
                                                 </div>
                                                 <div class="author">
-                                                <button class="btn btn-primary btn-lg btn-block" v-on:click="viewprofile(idx)">View
-                                                    Profile</button>
+                                                    <button class="btn btn-primary btn-lg btn-block"
+                                                        v-on:click="viewprofile(idx)">View
+                                                        Profile</button>
+                                                </div>
                                             </div>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="collapse" id="collapseExample2">
+                        <div class="card card-body">
+                            <div class="row">
+                                <h4 class="title text-center">Approved</h4>
+                                <div class="col-md-4" v-for="(profile, idx) in listofprofiles" v-bind:key="idx"
+                                    v-if="profile.videoApproved !== undefined && profile.role === 'coach' && profile.videoApproved === 'Approved'">
+
+                                    <div class="card card-plain card-blog">
+                                        <div class="card-image text-center ">
+                                            <img v-if="profile.profilephoto == undefined || profile.profilephoto == ''"
+                                                src="images/noProfilePic.jpg" width="60%" alt="Thumbnail Image"
+                                                class="rounded-circle img-fluid img-raised" />
+                                            <img v-if="profile.profilephoto != undefined && profile.profilephoto != ''"
+                                                v-bind:src="profile.profilephoto" width="60%" alt="Thumbnail Image"
+                                                class="rounded-circle img-fluid img-raised" />
+                                        </div>
+                                        <div class="card-body">
+                                            <h4 class="title text-center">{{ profile.name }}</h4>
+                                            <h5>
+                                                {{ profile.aboutme }}
+                                            </h5>
+                                            <div>
+                                                <h4 class="title p-0">Sports:
+                                                    <button class="btn btn-info btn-sm" v-for="c in profile.sports"
+                                                        disabled>{{ c
+                                                        }}</button>
+                                                </h4>
+                                            </div>
+                                            <div class="text-center">
+                                                <video v-bind:src="profile.video" class="w-100" controls></video>
+                                            </div>
+                                            <div class="container-fluid">
+                                                <div class="row justify-content-center text-center">
+                                                    <div class="col w-100 justify-content-center text-center">
+                                                        <button class="btn btn-danger w-100 btn-block "
+                                                            v-on:click="disapproved(idx)">Disapproved</button>
+
+                                                    </div>
+
+                                                </div>
+                                                <div class="author">
+                                                    <button class="btn btn-primary btn-lg btn-block"
+                                                        v-on:click="viewprofile(idx)">View
+                                                        Profile</button>
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="collapse" id="collapseExample3">
+                        <div class="card card-body">
+                            <div class="row">
+                                <h4 class="title text-center">Disapproved</h4>
+                                <div class="col-md-4" v-for="(profile, idx) in listofprofiles" v-bind:key="idx"
+                                    v-if="profile.videoApproved !== undefined && profile.role === 'coach' && profile.videoApproved === 'Disapproved'">
+
+                                    <div class="card card-plain card-blog">
+                                        <div class="card-image text-center ">
+                                            <img v-if="profile.profilephoto == undefined || profile.profilephoto == ''"
+                                                src="images/noProfilePic.jpg" width="60%" alt="Thumbnail Image"
+                                                class="rounded-circle img-fluid img-raised" />
+                                            <img v-if="profile.profilephoto != undefined && profile.profilephoto != ''"
+                                                v-bind:src="profile.profilephoto" width="60%" alt="Thumbnail Image"
+                                                class="rounded-circle img-fluid img-raised" />
+                                        </div>
+                                        <div class="card-body">
+                                            <h4 class="title text-center">{{ profile.name }}</h4>
+                                            <h5>
+                                                {{ profile.aboutme }}
+                                            </h5>
+                                            <div>
+                                                <h4 class="title p-0">Sports:
+                                                    <button class="btn btn-info btn-sm" v-for="c in profile.sports"
+                                                        disabled>{{ c
+                                                        }}</button>
+                                                </h4>
+                                            </div>
+                                            <div class="text-center">
+                                                <video v-bind:src="profile.video" class="w-100" controls></video>
+                                            </div>
+                                            <div class="container-fluid">
+                                                <div class="row justify-content-center text-center">
+                                                    <div class="col w-100 justify-content-center text-center">
+                                                        <button class="btn btn-success w-100 btn-block"
+                                                            v-on:click="approved(idx)">Approved</button>
+
+                                                    </div>
+
+                                                </div>
+                                                <div class="author">
+                                                    <button class="btn btn-primary btn-lg btn-block"
+                                                        v-on:click="viewprofile(idx)">View
+                                                        Profile</button>
+                                                </div>
                                             </div>
                                         </div>
                                     </div>
@@ -211,42 +229,101 @@ export default {
                 this.$router.push({ name: 'viewprofile' });
             }
         },
-        disapproved(idx) {
-            this.listofprofiles[idx].videoApproval = "Disapproved"
+        async disapproved(idx) {
+            this.listofprofiles[idx].videoApproved = "Disapproved"
+
             db.collection("users").doc(this.listofprofilesIDs[idx]).update({
                 videoApproved: "Disapproved"
             });
 
+        
+
+            // this.listofprofiles = [];
+            // const querySnapshot = await getDocs(collection(db, "users"));
+            // querySnapshot.forEach((doc) => {
+            //     this.listofprofiles.push(doc.data())
+            //     this.listofprofilesIDs.push(doc.id)
+            // });
+
+
         },
-        approved(idx) {
-            this.listofprofiles[idx].videoApproval = "Approved"
+        async approved(idx) {
+            var profile = this.listofprofiles[idx];
+            profile.videoApproved = "Approved"
+            this.$set(this.listofprofiles, idx, profile)
+
+            console.log(this.listofprofiles)
+            // this.listofprofiles[idx].videoApproval = "Approved";
+
             db.collection("users").doc(this.listofprofilesIDs[idx]).update({
                 videoApproved: "Approved"
             });
+
+
+            // this.listofprofiles = [];
+            // const querySnapshot = await getDocs(collection(db, "users"));
+            // querySnapshot.forEach((doc) => {
+            //     this.listofprofiles.push(doc.data())
+            //     this.listofprofilesIDs.push(doc.id)
+            // });
+
         }
     },
-    
+
+    // async created() {
+    //     if (localStorage.getItem("id") === '') {
+    //         this.$router.push({ name: 'landing' });
+    //     }
+    //     // console.log(localStorage.getItem("id"))
+    //     const querySnapshot = await getDocs(collection(db, "users"));
+    //     querySnapshot.forEach((doc) => {
+
+    //         this.listofprofiles = doc.data();
+    //         this.listofprofilesIDs = doc.id;
+    //     });
+
+
+    // }
+
     async created() {
         if (localStorage.getItem("id") === '') {
-            this.$router.push({ name: 'landing' });
+
+            const router = new Router({
+                routes: [
+                    {
+                        path: '/',
+                        name: 'landing',
+                        components: { default: Landing, header: MainNavbar, footer: MainFooter },
+                        props: {
+                            header: { colorOnScroll: 400 },
+                            footer: { backgroundColor: 'black' }
+                        }
+                    },
+
+
+                ],
+                scrollBehavior: to => {
+                    if (to.hash) {
+                        return { selector: to.hash };
+                    } else {
+                        return { x: 0, y: 0 };
+                    }
+                }
+            });
+
+            // this.$router.push({ name: 'landing' });
+
+            console.log(localStorage)
+
         }
-        // console.log(localStorage.getItem("id"))
+        console.log(localStorage)
+
         const querySnapshot = await getDocs(collection(db, "users"));
         querySnapshot.forEach((doc) => {
-            //this.listofprofiles.push(doc.data())
-            //this.listofprofilesIDs.push(doc.id)
-            if (doc.data() !== undefined) {
-                this.listofprofiles.push(doc.data());
-                this.listofprofilesIDs.push(doc.id);
-            }
-            else {
-                this.listofprofiles = [];
-                this.listofprofilesIDs = [];
-            }
-            
+            this.listofprofiles.push(doc.data())
+            this.listofprofilesIDs.push(doc.id)
+
         });
-
-
     }
 
 };

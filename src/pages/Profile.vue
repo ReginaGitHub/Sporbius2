@@ -1174,10 +1174,6 @@ export default {
         photogallery: this.photoGallery,
       });
     },
-    leaveTraining() {
-
-
-    }
 
 
 
