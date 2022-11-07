@@ -27,6 +27,7 @@
                             </div>
                             <div class="card-body">
                                 <h4 class="title text-center">{{ profile.name }}</h4>
+                                <h5 class="text-center">{{ profile.email }}</h5>
                                 <h5>
                                     {{ profile.aboutme }}
                                 </h5>

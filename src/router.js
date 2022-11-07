@@ -71,7 +71,6 @@ const router = new Router({
       },
       props: {
         header: { colorOnScroll: 400 },
-        footer: { backgroundColor: 'black' }
       }
     },
     {
