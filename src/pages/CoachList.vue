@@ -77,7 +77,7 @@ export default {
         };
     },
     methods: {
-        viewprofile(id) {
+        async viewprofile(id) {
             var selectedProfileID = this.listofprofilesIDs[id];
             var userID = sessionStorage.getItem('id');
             sessionStorage.setItem('viewProfileID', selectedProfileID)
@@ -86,6 +86,23 @@ export default {
                 this.$router.push({ name: 'profile' });
             }
             else {
+                var viewCount = 0;
+                const querySnapshot = await getDocs(collection(db, "users"));
+                querySnapshot.forEach((doc) => {
+                    if (doc.id == selectedProfileID) {
+                        if (doc.data().viewcount !== undefined) {
+                            viewCount = doc.data().viewcount;
+                        }
+                    }
+
+                });
+
+                viewCount += 1;
+
+                db.collection("users").doc(selectedProfileID).update({
+                    viewcount: viewCount,
+                });
+
                 this.$router.push({ name: 'viewprofile' });
             }
         }

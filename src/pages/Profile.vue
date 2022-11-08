@@ -944,34 +944,35 @@ export default {
   data() {
     return {
       nameOfUser: '',
-            role: '',
-            viewCount: 0,
-            aboutMe: '',
-            charactersLength: 0,
-            selectedSport: 'Choose Sport(s)',
-            chosenSport: [],
-            address: '',
-            postalCode: '',
-            trainingDesc: '',
-            mapSrc: '',
-            activities: [],
-            minDate: '',
-            dateInput: '',
-            startTimeInput: '',
-            endTimeInput: '',
-            priceInput: '',
-            uploadedVideo: '',
-            videoApproval: '',
-            uploadedProfilePhoto: '',
-            uploadedCoverPhoto: '',
+      role: '',
+      viewCount: 0,
+      aboutMe: '',
+      charactersLength: 0,
+      selectedSport: 'Choose Sport(s)',
+      chosenSport: [],
+      address: '',
+      postalCode: '',
+      trainingDesc: '',
+      mapSrc: '',
+      activities: [],
+      minDate: '',
+      dateInput: '',
+      startTimeInput: '',
+      endTimeInput: '',
+      priceInput: '',
+      uploadedVideo: '',
+      videoApproval: '',
+      uploadedProfilePhoto: '',
+      uploadedCoverPhoto: '',
 
-            JoinedActivities: [],
-            photoGallery: [],
-            uploadedGalleryPhoto: '',
-            participants: [],
-            currUserEmail: sessionStorage.getItem('curruseremail'),
-            currUserRole: sessionStorage.getItem('loggedRole'),
-            indexofactivity: -1,
+      JoinedActivities: [],
+      photoGallery: [],
+      uploadedGalleryPhoto: '',
+      participants: [],
+      currUserEmail: sessionStorage.getItem('curruseremail'),
+      currUserRole: sessionStorage.getItem('loggedRole'),
+      indexofactivity: -1,
+      viewCount: 0,
 
     };
   },
@@ -1354,6 +1355,10 @@ export default {
         }
         else {
           this.JoinedActivities = [];
+        }
+
+        if (doc.data().viewcount !== undefined) {
+          this.viewCount = doc.data().viewcount;
         }
 
       }

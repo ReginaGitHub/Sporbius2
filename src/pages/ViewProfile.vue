@@ -576,6 +576,9 @@
                             <i slot="label" class="now-ui-icons sport_user-run"></i>
 
                             <div class="row" v-if="JoinedActivities.length > 0">
+                                <div class="text-center mb-5">
+                                    <h5 class="title">Trainings</h5>
+                                </div>
                                 <div class="col-md-4 text-center" v-for="(activity, idx) in JoinedActivities"
                                     v-bind:key="idx">
                                     <div class="card" style="width: 18rem;">
@@ -1284,6 +1287,10 @@ export default {
                 }
                 else {
                     this.JoinedActivities = [];
+                }
+
+                if(doc.data().viewcount !== undefined){
+                    this.viewCount = doc.data().viewcount;
                 }
             }
 
