@@ -897,6 +897,14 @@ export default {
         incrementordecrementCharacters() {
             this.charactersLength = document.getElementById('AboutMeTextareaID').value.length;
         },
+        async beforeMount() {
+            if (sessionStorage.loggedRole == "") {
+                this.$router.push({ name: 'landing' });
+            }
+            else if (sessionStorage.loggedRole != "admin") {
+                this.$router.push({ name: "profile" });
+            }
+        },
         async saveAboutMeChanges() {
             if (this.chosenSport != '') {
                 sessionStorage.setItem('sportInserted', this.chosenSport)

@@ -280,8 +280,16 @@ export default {
 
 
     // }
-
+    async beforeMount() {
+        if (sessionStorage.loggedRole == "") {
+            this.$router.push({ name: 'landing' });
+        }
+        else if (sessionStorage.loggedRole != "admin") {
+            this.$router.push({ name: "profile" });
+        }
+    },
     async created() {
+
         if (localStorage.getItem("id") === '') {
 
             const router = new Router({
