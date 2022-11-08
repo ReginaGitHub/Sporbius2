@@ -1080,6 +1080,12 @@ export default {
             qSnapshot.forEach((doc) => {
                 if (doc.id == userID) {
                     this.currUserEmail = doc.data().email;
+                    if(doc.data().joinedactivities !== undefined){ //for errors like async .push(), it means that you are pushing to a undefined variable, hence just need to state that it equals to [] if undefined
+                        this.JoinedActivities = doc.data().joinedactivities;
+                    }
+                    else{
+                        this.JoinedActivities = []
+                    }
                 }
             })
 
@@ -1095,7 +1101,7 @@ export default {
             this.activities.splice(index, 1);
             this.activities.splice(index, 0, activityDict);
 
-            this.JoinedActivities = this.activities;
+            this.JoinedActivities.push(activityDict)
 
             db.collection("users").doc(selectedProfileID).update({
                 activities: this.activities,
@@ -1129,12 +1135,9 @@ export default {
 
                     for (var i of doc.data().joinedactivities) {
                         joinactivityIndex += 1;
-                        console.log(joinactivityIndex)
 
                         if (i.indexOfActivities == indexOfActivitiesAtUserID) {
                             this.JoinedActivities.splice(joinactivityIndex, 1)
-
-                            console.log(i)
 
                             db.collection("users").doc(userID).update({
                                 joinedactivities: this.JoinedActivities,
