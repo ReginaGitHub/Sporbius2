@@ -5,6 +5,7 @@ import Landing from './pages/Landing.vue';
 import Login from './pages/Login.vue';
 import Profile from './pages/Profile.vue';
 import ViewProfile from './pages/ViewProfile.vue';
+import AdminViewProfile from './pages/AdminViewProfile.vue';
 import Register from './pages/Register.vue'
 import CoachLanding from './pages/CoachLanding.vue';
 import CoachLogin from './pages/CoachLogin.vue';
@@ -138,6 +139,14 @@ const router = new Router({
       path: '/viewprofile',
       name: 'viewprofile',
       components: { default: ViewProfile, header: LoggedInNavbar, footer: MainFooter },
+      props: {
+        header: { colorOnScroll: 400 },
+      }
+    },
+    {
+      path: '/adminviewprofile',
+      name: 'adminviewprofile',
+      components: { default: AdminViewProfile, header: AdminNavBar, footer: MainFooter },
       props: {
         header: { colorOnScroll: 400 },
       }

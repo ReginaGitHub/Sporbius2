@@ -1219,6 +1219,7 @@ export default {
         this.nameOfUser = doc.data().name;
         this.role = doc.data().role;
 
+
         if (this.aboutMe != '' && this.aboutMe != undefined) {
           this.aboutMe = doc.data().aboutme;
         }

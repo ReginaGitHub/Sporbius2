@@ -28,9 +28,12 @@
       <div class="container">
         <div class="row">
           <div class="col-md-8 ml-auto mr-auto text-center">
-            <h2 class="title">Everything you need for a sport is right at your fingertips</h2>
+            <!-- <h2 class="title">Everything you need for a sport is right at your fingertips</h2> -->
+            <h2 class="title">We make sports available for everyone</h2>
+
             <h5>
-              Sporbius is a community for anyone who is interested in any type of sports. Our mission - <strong>To enable the world to playmore</strong>.
+              <!-- Sporbius is a community for anyone who is interested in any type of sports.  -->
+              Our mission - <strong>To enable the world to play more</strong>.
             </h5>
           </div>
         </div>
@@ -67,7 +70,7 @@
                 </div>
               </div>
               <h3 class="title">
-                Sporbius is a web app that connects avid sports players.
+                Sporbius is a platform connecting all avid sports players
               </h3>
               <h5>
                 The one and only platform that links professional coaches to interested players.

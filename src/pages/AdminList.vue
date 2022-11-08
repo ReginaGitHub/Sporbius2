@@ -226,7 +226,7 @@ export default {
                 this.$router.push({ name: 'profile' });
             }
             else {
-                this.$router.push({ name: 'viewprofile' });
+                this.$router.push({ name: 'adminviewprofile' });
             }
         },
         async disapproved(idx) {
@@ -264,6 +264,7 @@ export default {
 
         }
     },
+    
 
     // async created() {
     //     if (localStorage.getItem("id") === '') {

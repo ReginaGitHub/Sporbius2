@@ -5,7 +5,7 @@
           </parallax>
           <div class="content-center">
               <div class="container">
-                  <h1 class="title">View the various verified coaches</h1>
+                  <h1 class="title">View all students</h1>
                   <div class="text-center">
                   </div>
               </div>
