@@ -12,6 +12,12 @@
             </div>
         </div>
         <div class="container">
+            <div class="row text-center justify-content-center">
+                <h4 class="title">Dashboard</h4>
+                <div class="col-md-4 ">
+                    <canvas id="myChart" width="400" height="400"></canvas>
+                </div>
+            </div>
             <div class="section">
                 <div class="text-center">
                     <button class="btn btn-primary float-start" type="button" data-bs-toggle="collapse"
@@ -200,6 +206,10 @@ import 'firebase/compat/auth';
 import db from '../firebase/firebaseInit';
 import { collection, query, where, getDocs } from "firebase/firestore";
 
+import Chart from 'chart.js';
+
+
+
 export default {
     name: 'studentlist',
     bodyClass: 'landing-page',
@@ -214,9 +224,99 @@ export default {
             message: '',
             listofprofiles: [],
             listofprofilesIDs: [],
+            tries: 0,
+            chart: '',
+            
+
         };
     },
+    // mounted() {
+    //         const ctx = document.getElementById('myChart');
+    //         const myChart = new Chart(ctx, {
+    //         type: 'pie',
+    //         data: {
+    //             labels: ['Red', 'Green', 'Yello'],
+    //             datasets: [{
+    //                 label: 'My first dataset',
+    //                 data: [this.disapprove,this.approve,this.pending],
+    //                 backgroundColor: [
+    //                 'rgb(255, 99, 132)',
+    //                 'rgb(75, 192, 192)',
+    //                 'rgb(255, 205, 86)',
+    //                 ],
+    //                 hoverOffset: 4,
+
+    //             }]
+    //         },
+    //     });
+    //         myChart;
+    //     },
+    mounted: function(){
+        this.doChart()
+    },
     methods: {
+        doChart() {
+            var disapprove = 0;
+            var approve = 0;
+            var pending = 0
+
+            for (var cat of this.listofprofiles) {
+                if (cat.role === "coach") {
+                    if (cat.videoApproved == "Approved") {
+                        approve += 1
+                    }
+                    else if (cat.videoApproved == "Disapproved") {
+                        disapprove += 1
+
+                    }
+                    else if (cat.videoApproved == "Pending Approval") {
+                        pending += 1
+                    }
+                }
+
+
+        }
+        if (this.tries > 0) {
+            sessionStorage.approve = approve;
+            sessionStorage.disapprove = disapprove;
+            sessionStorage.pending = pending;
+        }
+        if (this.tries == 0) {
+            const ctx = document.getElementById('myChart');
+            const myChart = new Chart(ctx, {
+            type: 'pie',
+            data: {
+                labels: ['Pending', 'Approved', 'Disapproved'],
+                datasets: [{
+                    label: 'Status',
+                    data: [Number(sessionStorage.pending),Number(sessionStorage.approve),Number(sessionStorage.disapprove)],
+                    backgroundColor: [
+                    'rgb(255, 205, 86)',
+                    'rgb(75, 192, 192)',
+                    'rgb(255, 99, 132)',
+                    ],
+                    hoverOffset: 4,
+
+                }]
+            },
+        });
+
+            myChart;
+            this.chart = myChart;
+        }
+        else {
+            var myChart = this.chart;
+            myChart.data.datasets[0].data = [Number(sessionStorage.pending),Number(sessionStorage.approve),Number(sessionStorage.disapprove)];
+            myChart.update();
+            this.chart = myChart;
+        }
+
+
+        this.tries += 1;
+
+
+        
+        },
         viewprofile(id) {
             var selectedProfileID = this.listofprofilesIDs[id];
             var userID = sessionStorage.getItem('id');
@@ -236,7 +336,8 @@ export default {
                 videoApproved: "Disapproved"
             });
 
-        
+            this.doChart();
+            
 
             // this.listofprofiles = [];
             // const querySnapshot = await getDocs(collection(db, "users"));
@@ -254,6 +355,7 @@ export default {
                 videoApproved: "Approved"
             });
 
+            this.doChart();
 
             // this.listofprofiles = [];
             // const querySnapshot = await getDocs(collection(db, "users"));
@@ -270,7 +372,7 @@ export default {
     //     if (localStorage.getItem("id") === '') {
     //         this.$router.push({ name: 'landing' });
     //     }
-    //     // console.log(localStorage.getItem("id"))
+    //     //   (localStorage.getItem("id"))
     //     const querySnapshot = await getDocs(collection(db, "users"));
     //     querySnapshot.forEach((doc) => {
 
@@ -280,14 +382,7 @@ export default {
 
 
     // }
-    async beforeMount() {
-        if (sessionStorage.loggedRole == "") {
-            this.$router.push({ name: 'landing' });
-        }
-        else if (sessionStorage.loggedRole != "admin") {
-            this.$router.push({ name: "profile" });
-        }
-    },
+
     async created() {
 
         if (localStorage.getItem("id") === '') {
@@ -322,12 +417,38 @@ export default {
         }
         console.log(localStorage)
 
+
         const querySnapshot = await getDocs(collection(db, "users"));
         querySnapshot.forEach((doc) => {
             this.listofprofiles.push(doc.data())
             this.listofprofilesIDs.push(doc.id)
 
         });
+        var approve = 0;
+        var disapprove = 0;
+        var pending = 0;
+        for (var cat of this.listofprofiles) {
+            if (cat.role == "coach") {
+                if (cat.videoApproved == "Approved") {
+                    approve += 1;
+                }
+                else if (cat.videoApproved == "Disapproved") {
+                    disapprove += 1;
+                }
+                else if (cat.videoApproved == "Pending Approval") {
+                    pending += 1;
+                }
+            }
+
+        }
+        sessionStorage.setItem("approve", approve);
+        sessionStorage.setItem("disapprove", disapprove);
+        sessionStorage.setItem("pending", pending);
+
+
+
+
+
     }
 
 };

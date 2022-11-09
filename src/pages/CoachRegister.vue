@@ -157,6 +157,7 @@ export default {
                         name: this.name,
                         email: this.email,
                         role: 'coach',
+                        videoApproved: "Pending Approval",
                     })
                     this.$router.push({ name: 'profile' });
                     return;
