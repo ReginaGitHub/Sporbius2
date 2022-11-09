@@ -124,12 +124,23 @@
                                                 </button>
                                             </div>
                                             <div v-else-if="currUserRole === 'student'">
-                                                <button class="btn btn-primary btn-block btn-lg"
-                                                    v-on:click="joinTrainingDetails(idx)">
-                                                    <i class="ri-pin-distance-line ri-lg"></i> Join</button>
+                                                <form v-bind:action="formaction" class="w-100 mx-auto" method="POST">
+                                                    <input type="hidden" name="_next" hidden
+                                                        value="http://localhost:8080/#/viewprofile">
+                                                    <textarea label="Description" name="description" hidden solo>
+                                                        Location: {{ activity.address }} 
+                                                        Postal Code: {{ activity.postalcode }}
+                                                        Training Details: {{ activity.trainingdesc }}
+                                                        Date: {{ activity.date }}
+                                                        Timing: {{ activity.starttime }} - {{ activity.endtime }}
+                                                        Price: SGD ${{ activity.price }}/hr
+                                                    </textarea>
+                                                    <button class="btn btn-primary btn-block btn-lg"
+                                                        v-on:click="joinTrainingDetails(idx)">
+                                                        <i class="ri-pin-distance-line ri-lg"></i> Join</button>
+                                                </form>
+
                                             </div>
-
-
                                         </div>
                                     </div>
                                 </div>
@@ -854,6 +865,7 @@ export default {
             participants: [],
             currUserEmail: sessionStorage.getItem('curruseremail'),
             currUserRole: sessionStorage.getItem('loggedRole'),
+            formaction: 'https://formsubmit.co/' + sessionStorage.getItem('curruseremail'),
 
         };
     },
@@ -1080,10 +1092,10 @@ export default {
             qSnapshot.forEach((doc) => {
                 if (doc.id == userID) {
                     this.currUserEmail = doc.data().email;
-                    if(doc.data().joinedactivities !== undefined){ //for errors like async .push(), it means that you are pushing to a undefined variable, hence just need to state that it equals to [] if undefined
+                    if (doc.data().joinedactivities !== undefined) { //for errors like async .push(), it means that you are pushing to a undefined variable, hence just need to state that it equals to [] if undefined
                         this.JoinedActivities = doc.data().joinedactivities;
                     }
-                    else{
+                    else {
                         this.JoinedActivities = []
                     }
                 }
@@ -1292,7 +1304,7 @@ export default {
                     this.JoinedActivities = [];
                 }
 
-                if(doc.data().viewcount !== undefined){
+                if (doc.data().viewcount !== undefined) {
                     this.viewCount = doc.data().viewcount;
                 }
             }

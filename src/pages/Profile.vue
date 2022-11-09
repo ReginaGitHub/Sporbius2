@@ -130,7 +130,7 @@
               </div> -->
 
 
-              <div class="text-center mb-5">
+              <div class="text-center mb-5" v-if="videoApproval == 'Approved'">
                 <h5>Add New Training Details for students to join!</h5>
                 <!-- Button trigger modal -->
                 <div type="button" class="btn btn-primary btn-lg" data-bs-toggle="modal"
@@ -138,8 +138,11 @@
                   <i class="ri-add-line ri-lg"></i> Add New Training Details
                 </div>
               </div>
+              <div class="text-center mb-5" v-else>
+                <h5 class="title">Video needs to be Approved!</h5>
+                </div>
               <div class="row">
-                <div class="col-md-4 text-center" v-for="(activity, idx) in activities" v-bind:key="idx">
+                <div class="col-md-4 text-center" v-for="(activity, idx) in activities" v-bind:key="idx" v-if="videoApproval == 'Approved'">
                   <div class="card" style="width: 18rem;">
                     <div class="card-body text-left">
                       <div class="mapouter" v-html="activity.mapsrc">
