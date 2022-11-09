@@ -126,14 +126,15 @@
                                             <div v-else-if="currUserRole === 'student'">
                                                 <form v-bind:action="formaction" class="w-100 mx-auto" method="POST">
                                                     <input type="hidden" name="_next" hidden
-                                                        value="http://localhost:8080/#/viewprofile">
-                                                    <textarea label="Description" name="description" hidden solo>
-                                                        Location: {{ activity.address }} 
-                                                        Postal Code: {{ activity.postalcode }}
-                                                        Training Details: {{ activity.trainingdesc }}
-                                                        Date: {{ activity.date }}
-                                                        Timing: {{ activity.starttime }} - {{ activity.endtime }}
-                                                        Price: SGD ${{ activity.price }}/hr
+                                                        value="http://localhost:8080/#/profile">
+                                                    <textarea label="Description" name="description" solo>
+                                                        {{ "Location: " + activity.address + "\n" +
+                                                            "Postal Code: " + activity.postalcode + "\n" +
+                                                            "Training Details: " + activity.trainingdesc + "\n" +
+                                                            "Date: " + activity.date + "\n" +
+                                                            "Timing: " + activity.starttime + " - " + activity.endtime + "\n" +
+                                                            "Price: SGD $ " + activity.price + "\n"
+                                                        }}
                                                     </textarea>
                                                     <button class="btn btn-primary btn-block btn-lg"
                                                         v-on:click="joinTrainingDetails(idx)">
