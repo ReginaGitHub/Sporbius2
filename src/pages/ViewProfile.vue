@@ -1205,7 +1205,7 @@ export default {
             }
         })
 
-        const querySnapshot = await getDocs(collection(db, "users"), where('id', '===', viewProfileID));
+        const querySnapshot = await getDocs(collection(db, "users"));
         querySnapshot.forEach((doc) => {
             if (doc.id == viewProfileID) {
                 this.nameOfUser = doc.data().name;
