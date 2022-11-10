@@ -93,7 +93,12 @@ export default {
             return firebase.auth().signInWithEmailAndPassword(this.email, this.password).then(() => {
               this.error = false;
               this.errorMsg = "";
-              this.$router.push({ name: "profile" });
+              if (this.email === 'admin@sporbius.com') {
+              this.$router.push({ name: "adminlist" });
+              }
+              else {
+                this.$router.push({ name: "profile" });
+              }
               console.log(sessionStorage.id)
               console.log(firebase.auth().currentUser.uid)
             }).catch((err) => {

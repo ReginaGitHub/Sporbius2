@@ -1197,6 +1197,7 @@ export default {
         photogallery: this.photoGallery,
       });
     },
+
     async unjoinTrainingDetails(index) {
       var unjoinTrainingFromUserID = this.JoinedActivities[index].userid;
       var indexOfActivitiesAtUserID = this.JoinedActivities[index].indexOfActivities;
@@ -1234,9 +1235,6 @@ export default {
         activities: this.activities,
       });
     }
-
-
-
   },
 
 
@@ -1278,6 +1276,7 @@ export default {
       if (doc.id == sessionStorage.id) {
         this.nameOfUser = doc.data().name;
         this.role = doc.data().role;
+
 
         if (this.aboutMe != '' && this.aboutMe != undefined) {
           this.aboutMe = doc.data().aboutme;

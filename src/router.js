@@ -5,6 +5,7 @@ import Landing from './pages/Landing.vue';
 import Login from './pages/Login.vue';
 import Profile from './pages/Profile.vue';
 import ViewProfile from './pages/ViewProfile.vue';
+import AdminViewProfile from './pages/AdminViewProfile.vue';
 import Register from './pages/Register.vue'
 import CoachLanding from './pages/CoachLanding.vue';
 import CoachLogin from './pages/CoachLogin.vue';
@@ -14,7 +15,11 @@ import StudentList from "./pages/StudentList.vue";
 import CoachList from "./pages/CoachList.vue";
 import MainNavbar from './layout/MainNavbar.vue';
 import MainFooter from './layout/MainFooter.vue';
+import LoggedInNavbar from './layout/LoggedInNavbar.vue';
 import CoachLandingNavbar from './layout/CoachLandingNavbar.vue';
+import AdminList from './pages/AdminList.vue';
+import AdminNavBar from './layout/AdminNavbar.vue';
+
 
 
 Vue.use(Router);
@@ -53,19 +58,18 @@ const router = new Router({
     {
       path: '/profile',
       name: 'profile',
-      components: { default: Profile, header: MainNavbar, footer: MainFooter },
+      components: { default: Profile, header: LoggedInNavbar, footer: MainFooter },
       meta: {
         requiresAuth: true,
       },
       props: {
         header: { colorOnScroll: 400 },
-        footer: { backgroundColor: 'black' }
       }
     },
     {
       path: '/studentlist',
       name: 'studentlist',
-      components: { default: StudentList, header: MainNavbar, footer: MainFooter },
+      components: { default: StudentList, header: LoggedInNavbar, footer: MainFooter },
       meta: {
         requiresAuth: true,
       },
@@ -118,7 +122,15 @@ const router = new Router({
     {
       path: '/coachlist',
       name: 'coachlist',
-      components: { default: CoachList, header: MainNavbar, footer: MainFooter },
+      components: { default: CoachList, header: LoggedInNavbar, footer: MainFooter },
+      props: {
+        header: { colorOnScroll: 400 },
+      }
+    },
+    {
+      path: '/adminlist',
+      name: 'adminlist',
+      components: { default: AdminList, header: AdminNavBar, footer: MainFooter },
       props: {
         header: { colorOnScroll: 400 },
       }
@@ -126,7 +138,15 @@ const router = new Router({
     {
       path: '/viewprofile',
       name: 'viewprofile',
-      components: { default: ViewProfile, header: MainNavbar, footer: MainFooter },
+      components: { default: ViewProfile, header: LoggedInNavbar, footer: MainFooter },
+      props: {
+        header: { colorOnScroll: 400 },
+      }
+    },
+    {
+      path: '/adminviewprofile',
+      name: 'adminviewprofile',
+      components: { default: AdminViewProfile, header: AdminNavBar, footer: MainFooter },
       props: {
         header: { colorOnScroll: 400 },
       }
