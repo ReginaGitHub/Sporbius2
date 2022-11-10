@@ -59,6 +59,7 @@ onAuthStateChanged(auth, async (user) => {
           var role = doc.data().role; 
           console.log("hello this is role", role);
           sessionStorage.setItem("loggedRole", role);
+          sessionStorage.setItem("curruseremail", doc.data().email);
         } 
       });         
       console.log(user.uid) 

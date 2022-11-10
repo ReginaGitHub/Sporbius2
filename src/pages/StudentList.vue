@@ -41,16 +41,17 @@
                                       Profile</button>
                               </div>
 
-                          </div>
-                      </div>
-                  </div>
+
+                            </div>
+                        </div>
+                    </div>
 
 
-              </div>
-          </div>
-      </div>
+                </div>
+            </div>
+        </div>
 
-  </div>
+    </div>
 </template>
 <script>
 import { Button, FormGroupInput } from '@/components';
@@ -60,48 +61,64 @@ import db from '../firebase/firebaseInit';
 import { collection, query, where, getDocs } from "firebase/firestore";
 
 export default {
-  name: 'studentlist',
-  bodyClass: 'landing-page',
-  components: {
-      [Button.name]: Button,
-      [FormGroupInput.name]: FormGroupInput,
-  },
-  data() {
-      return {
-          firstName: '',
-          email: '',
-          message: '',
-          listofprofiles: [],
-          listofprofilesIDs: [],
-      };
-  },
-  methods: {
-      viewprofile(id) {
-          var selectedProfileID = this.listofprofilesIDs[id];
-          var userID = sessionStorage.getItem('id');
-          sessionStorage.setItem('viewProfileID', selectedProfileID)
+    name: 'studentlist',
+    bodyClass: 'landing-page',
+    components: {
+        [Button.name]: Button,
+        [FormGroupInput.name]: FormGroupInput,
+    },
+    data() {
+        return {
+            firstName: '',
+            email: '',
+            message: '',
+            listofprofiles: [],
+            listofprofilesIDs: [],
+        };
+    },
+    methods: {
+        async viewprofile(id) {
+            var selectedProfileID = this.listofprofilesIDs[id];
+            var userID = sessionStorage.getItem('id');
+            sessionStorage.setItem('viewProfileID', selectedProfileID)
 
-          if (userID == selectedProfileID) {
-              this.$router.push({ name: 'profile' });
-          }
-          else {
-              this.$router.push({ name: 'viewprofile' });
-          }
-      }
-  },
-  async created() {
-      if (localStorage.getItem("id") === '') {
-          this.$router.push({ name: 'landing' });
-      }
-      // console.log(localStorage.getItem("id"))
-      const querySnapshot = await getDocs(collection(db, "users"));
-      querySnapshot.forEach((doc) => {
-          this.listofprofiles.push(doc.data())
-          this.listofprofilesIDs.push(doc.id)
-      });
+            if (userID == selectedProfileID) {
+                this.$router.push({ name: 'profile' });
+            }
+            else {
+                var viewCount = 0;
+                const querySnapshot = await getDocs(collection(db, "users"));
+                querySnapshot.forEach((doc) => {
+                    if(doc.id == selectedProfileID){
+                        if(doc.data().viewcount !== undefined){
+                            viewCount = doc.data().viewcount;
+                        }
+                    }
+
+                });
+
+                viewCount += 1;
+
+                db.collection("users").doc(selectedProfileID).update({
+                    viewcount: viewCount,
+                });
+                this.$router.push({ name: 'viewprofile' });
+            }
+        }
+    },
+    async created() {
+        if (localStorage.getItem("id") === '') {
+            this.$router.push({ name: 'landing' });
+        }
+        // console.log(localStorage.getItem("id"))
+        const querySnapshot = await getDocs(collection(db, "users"));
+        querySnapshot.forEach((doc) => {
+            this.listofprofiles.push(doc.data())
+            this.listofprofilesIDs.push(doc.id)
+        });
 
 
-  }
+    }
 
 };
 </script>

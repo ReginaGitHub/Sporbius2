@@ -130,7 +130,7 @@
               </div> -->
 
 
-              <div class="text-center mb-5">
+              <div class="text-center mb-5" v-if="videoApproval == 'Approved'">
                 <h5>Add New Training Details for students to join!</h5>
                 <!-- Button trigger modal -->
                 <div type="button" class="btn btn-primary btn-lg" data-bs-toggle="modal"
@@ -138,8 +138,11 @@
                   <i class="ri-add-line ri-lg"></i> Add New Training Details
                 </div>
               </div>
+              <div class="text-center mb-5" v-else>
+                <h5 class="title">Video needs to be Approved!</h5>
+                </div>
               <div class="row">
-                <div class="col-md-4 text-center" v-for="(activity, idx) in activities" v-bind:key="idx">
+                <div class="col-md-4 text-center" v-for="(activity, idx) in activities" v-bind:key="idx" v-if="videoApproval == 'Approved'">
                   <div class="card" style="width: 18rem;">
                     <div class="card-body text-left">
                       <div class="mapouter" v-html="activity.mapsrc">
@@ -682,11 +685,11 @@
               </div> -->
 
 
-              <div class="row">
+              <div class="row" v-if="JoinedActivities.length > 0">
                 <div class="col-md-4 text-center" v-for="(activity, idx) in JoinedActivities" v-bind:key="idx">
                   <div class="card" style="width: 18rem;">
                     <div class="card-body text-left">
-                      <!-- <div class="mapouter" v-html="activity.mapsrc">
+                      <div class="mapouter" v-html="activity.mapsrc">
                       </div>
                       <h5 class="card-title fw-bold my-3">Location</h5>
                       <h5 class="card-text">{{ activity.address }} <br>Postal Code: {{ activity.postalcode }} </h5>
@@ -697,14 +700,25 @@
                       <h5 class="card-title fw-bold my-3">Timing</h5>
                       <h5 class="card-text">{{ activity.starttime }} - {{ activity.endtime }}</h5>
                       <h5 class="card-title fw-bold my-3">Price</h5>
-                      <h5 class="card-text">SGD ${{ activity.price }}/hr</h5> -->
+                      <h5 class="card-text">SGD ${{ activity.price }}/hr</h5>
+                      <h5 class="card-title fw-bold my-3"
+                        v-if="activity.participants != undefined && activity.participants.length !== 0">
+                        Participants</h5>
+                      <h5 class="card-text" v-for="participant in activity.participants">
+                        {{ participant }}
+                      </h5>
                       <!-- Button trigger modal -->
-                      <!-- <div type="button" class="btn btn-danger btn-block btn-lg" data-bs-toggle="modal"
-                        data-bs-target="#staticBackdropEditTrainingDetailsID" v-on:click="leaveTraining">
-                        <i slot="label" class="now-ui-icons ui-1_simple-remove"></i> Leave Training
-                      </div> -->
+                      <div type="button" class="btn btn-secondary btn-block btn-lg"
+                        v-on:click="unjoinTrainingDetails(idx)">
+                        <i class="ri-pin-distance-line ri-lg"></i> Unjoin
+                      </div>
                     </div>
                   </div>
+                </div>
+              </div>
+              <div v-else>
+                <div class="text-center mb-5">
+                  <h5 class="title">You have not joined a training.</h5>
                 </div>
               </div>
 
@@ -957,7 +971,11 @@ export default {
       JoinedActivities: [],
       photoGallery: [],
       uploadedGalleryPhoto: '',
-
+      participants: [],
+      currUserEmail: sessionStorage.getItem('curruseremail'),
+      currUserRole: sessionStorage.getItem('loggedRole'),
+      indexofactivity: -1,
+      viewCount: 0,
 
     };
   },
@@ -1001,11 +1019,13 @@ export default {
                         </div>`;
       var activityID = sessionStorage.getItem('editActivityIndex');
       this.activities.splice(activityID, 1);
-      this.activities.splice(activityID, 0, { address: this.address, postalcode: this.postalCode, trainingdesc: this.trainingDesc, mapsrc: this.mapSrc, date: this.dateInput, starttime: this.startTimeInput, endtime: this.endTimeInput, price: this.priceInput })
+      this.activities.splice(activityID, 0, { userid: sessionStorage.id, indexOfActivities: this.indexofactivity, address: this.address, postalcode: this.postalCode, trainingdesc: this.trainingDesc, mapsrc: this.mapSrc, date: this.dateInput, starttime: this.startTimeInput, endtime: this.endTimeInput, price: this.priceInput, participants: this.participants })
 
       db.collection("users").doc(sessionStorage.id).update({
         activities: this.activities,
       });
+
+      this.participants = [];
     },
     async deleteTrainingDetails() {
       var activityID = sessionStorage.getItem('editActivityIndex');
@@ -1023,6 +1043,9 @@ export default {
       this.startTimeInput = this.activities[activityID].starttime;
       this.endTimeInput = this.activities[activityID].endtime;
       this.priceInput = this.activities[activityID].price;
+      this.participants = this.activities[activityID].participants;
+      this.indexofactivity = activityID
+
       sessionStorage.setItem("editActivityIndex", activityID);
       //session activity id
       //get activity id in editTrainingDetails()
@@ -1175,8 +1198,43 @@ export default {
       });
     },
 
+    async unjoinTrainingDetails(index) {
+      var unjoinTrainingFromUserID = this.JoinedActivities[index].userid;
+      var indexOfActivitiesAtUserID = this.JoinedActivities[index].indexOfActivities;
+
+      this.JoinedActivities.splice(index, 1)
+
+      db.collection("users").doc(sessionStorage.id).update({
+        joinedactivities: this.JoinedActivities,
+      });
+
+      const querySnapshot = await getDocs(collection(db, "users"));
+      querySnapshot.forEach((doc) => {
+        if (doc.id == unjoinTrainingFromUserID) {
+          this.activities = doc.data().activities;
+        }
+      })
+      var userID = sessionStorage.getItem('id');
+
+      const qSnapshot = await getDocs(collection(db, "users"));
+      qSnapshot.forEach((doc) => {
+        if (doc.id == userID) {
+          this.currUserEmail = doc.data().email
+        }
+      })
 
 
+      this.participants = this.activities[indexOfActivitiesAtUserID].participants
+      this.participants.splice(this.currUserEmail)
+
+      var activityDict = { address: this.activities[indexOfActivitiesAtUserID].address, postalcode: this.activities[indexOfActivitiesAtUserID].postalcode, trainingdesc: this.activities[indexOfActivitiesAtUserID].trainingdesc, mapsrc: this.activities[indexOfActivitiesAtUserID].mapsrc, date: this.activities[indexOfActivitiesAtUserID].date, starttime: this.activities[indexOfActivitiesAtUserID].starttime, endtime: this.activities[indexOfActivitiesAtUserID].endtime, price: this.activities[indexOfActivitiesAtUserID].price, participants: this.participants }
+      this.activities.splice(index, 1);
+      this.activities.splice(index, 0, activityDict);
+
+      db.collection("users").doc(unjoinTrainingFromUserID).update({
+        activities: this.activities,
+      });
+    }
   },
 
 
@@ -1292,6 +1350,17 @@ export default {
         }
         else {
           this.photoGallery = [];
+        }
+
+        if (doc.data().joinedactivities !== undefined) {
+          this.JoinedActivities = doc.data().joinedactivities;
+        }
+        else {
+          this.JoinedActivities = [];
+        }
+
+        if (doc.data().viewcount !== undefined) {
+          this.viewCount = doc.data().viewcount;
         }
 
       }
