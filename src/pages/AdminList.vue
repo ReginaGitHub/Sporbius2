@@ -251,9 +251,9 @@ export default {
     //     });
     //         myChart;
     //     },
-    mounted: function(){
-        this.doChart()
-    },
+    // mounted: function(){
+    //     this.doChart()
+    // },
     methods: {
         doChart() {
             var disapprove = 0;
@@ -445,7 +445,7 @@ export default {
         sessionStorage.setItem("disapprove", disapprove);
         sessionStorage.setItem("pending", pending);
 
-
+        this.doChart()
 
 
 
