@@ -1,46 +1,45 @@
 <template>
-  <div>
-      <div class="page-header page-header-small clear-filter" filter-color="black">
-          <parallax class="page-header-image" style="background-image: url('images/StudentLand.jpg')">
-          </parallax>
-          <div class="content-center">
-              <div class="container">
-                  <h1 class="title">View all students</h1>
-                  <div class="text-center">
-                  </div>
-              </div>
-          </div>
-      </div>
-      <div class="container">
-          <div class="section">
-              <div class="row">
-                  <div class="col-md-4" v-for="(profile, idx) in listofprofiles"
-                      v-if="profile.videoApproved != undefined && profile.role == 'coach' && profile.videoApproved == 'Approved'">
-                      <div class="card card-plain card-blog">
-                          <div class="card-image text-center ">
-                              <img v-if="profile.profilephoto == undefined || profile.profilephoto == ''"
-                                  src="images/noProfilePic.jpg" width="60%" alt="Thumbnail Image"
-                                  class="rounded-circle img-fluid img-raised" />
-                              <img v-if="profile.profilephoto != undefined && profile.profilephoto != ''"
-                                  v-bind:src="profile.profilephoto" width="60%" alt="Thumbnail Image"
-                                  class="rounded-circle img-fluid img-raised" />
-                          </div>
-                          <div class="card-body">
-                              <h4 class="title text-center">{{ profile.name }}</h4>
-                              <h5>
-                                  {{ profile.aboutme }}
-                              </h5>
-                              <div>
-                                  <h4 class="title p-0">Sports:
-                                      <button class="btn btn-info btn-sm" v-for="c in profile.sports" disabled>{{ c
-                                      }}</button>
-                                  </h4>
-                              </div>
-                              <div class="author">
-                                  <button class="btn btn-primary btn-lg btn-block" v-on:click="viewprofile(idx)">View
-                                      Profile</button>
-                              </div>
-
+    <div>
+        <div class="page-header page-header-small clear-filter" filter-color="black">
+            <parallax class="page-header-image" style="background-image: url('images/StudentLand.jpg')">
+            </parallax>
+            <div class="content-center">
+                <div class="container">
+                    <h1 class="title">View the various students profiles</h1>
+                    <div class="text-center">
+                    </div>
+                </div>
+            </div>
+        </div>
+        <div class="container">
+            <div class="section">
+                <div class="row">
+                    <div class="col-md-4" v-for="(profile, idx) in listofprofiles" v-if="profile.role == 'student'">
+                        <div class="card card-plain card-blog">
+                            <div class="card-image text-center ">
+                                <img v-if="profile.profilephoto == undefined || profile.profilephoto == ''"
+                                    src="images/noProfilePic.jpg" width="60%" alt="Thumbnail Image"
+                                    class="rounded-circle img-fluid img-raised" />
+                                <img v-if="profile.profilephoto != undefined && profile.profilephoto != ''"
+                                    v-bind:src="profile.profilephoto" width="60%" alt="Thumbnail Image"
+                                    class="rounded-circle img-fluid img-raised" />
+                            </div>
+                            <div class="card-body">
+                                <h4 class="title text-center">{{ profile.name }}</h4>
+                                <h5 class="text-center">{{ profile.email }}</h5>
+                                <h5>
+                                    {{ profile.aboutme }}
+                                </h5>
+                                <div>
+                                    <h4 class="title p-0">Sports:
+                                        <button class="btn btn-info btn-sm" v-for="c in profile.sports" disabled>{{ c
+                                        }}</button>
+                                    </h4>
+                                </div>
+                                <div class="author">
+                                    <button class="btn btn-primary btn-lg btn-block" v-on:click="viewprofile(idx)">View
+                                        Profile</button>
+                                </div>
 
                             </div>
                         </div>
