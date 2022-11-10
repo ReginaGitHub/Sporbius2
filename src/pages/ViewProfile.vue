@@ -87,12 +87,16 @@
                         <tab-pane title="Profile">
                             <i slot="label" class="now-ui-icons sport_user-run"></i>
 
-                            <div class="text-center mb-5" v-if="activities.length === 0">
+                            
+                            <div class="text-center mb-5" v-if="activities.length === 0 && videoApproval == 'Approved'">
                                 <h5 class="title">Not Available</h5>
+                            </div>
+                            <div class="text-center mb-5" v-else-if="videoApproval == 'Disapproved'">
+                                <h5 class="title">Video needs to be Approved!</h5>
                             </div>
                             <div class="row">
                                 <div class="col-md-4 text-center" v-for="(activity, idx) in activities"
-                                    v-bind:key="idx">
+                                    v-if="videoApproval == 'Approved'" v-bind:key="idx">
                                     <div class="card" style="width: 18rem;">
                                         <div class="card-body text-left">
                                             <div class="mapouter" v-html="activity.mapsrc">
@@ -127,13 +131,13 @@
                                                 <form v-bind:action="formaction" class="w-100 mx-auto" method="POST">
                                                     <input type="hidden" name="_next" hidden
                                                         value="http://localhost:8080/#/profile">
-                                                    <textarea label="Description" name="description" solo>
+                                                    <textarea label="Description" name="description" solo hidden>
                                                         {{ "Location: " + activity.address + "\n" +
-                                                            "Postal Code: " + activity.postalcode + "\n" +
-                                                            "Training Details: " + activity.trainingdesc + "\n" +
-                                                            "Date: " + activity.date + "\n" +
-                                                            "Timing: " + activity.starttime + " - " + activity.endtime + "\n" +
-                                                            "Price: SGD $ " + activity.price + "\n"
+                                                                "Postal Code: " + activity.postalcode + "\n" +
+                                                                "Training Details: " + activity.trainingdesc + "\n" +
+                                                                "Date: " + activity.date + "\n" +
+                                                                "Timing: " + activity.starttime + " - " + activity.endtime + "\n" +
+                                                                "Price: SGD $ " + activity.price + "\n"
                                                         }}
                                                     </textarea>
                                                     <button class="btn btn-primary btn-block btn-lg"

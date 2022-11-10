@@ -102,7 +102,7 @@
                 <h2 class="title">Here is our team</h2>
                 <div class="team">
                     <div class="row">
-                        <div class="col-md-3">
+                        <div class="col-md-4">
                             <div class="team-player">
                                 <img src="images/ArthurProfilePic.jpeg" alt="Thumbnail Image"
                                     class="rounded-circle img-fluid img-raised" />
@@ -118,7 +118,7 @@
                                     class="btn btn-primary btn-icon btn-round" target="_blank"><i class="fab fa-linkedin"></i></a>
                             </div>
                         </div>
-                        <div class="col-md-3">
+                        <div class="col-md-4">
                             <div class="team-player">
                                 <img src="images/ReginaProfilePic.jpg" alt="Thumbnail Image"
                                     class="rounded-circle img-fluid img-raised" />
@@ -135,7 +135,7 @@
                                     class="btn btn-primary btn-icon btn-round" target="_blank"><i class="fab fa-linkedin"></i></a>
                             </div>
                         </div>
-                        <div class="col-md-3">
+                        <div class="col-md-4">
                             <div class="team-player">
                                 <img src="images/DexterProfilePic.jpg" alt="Thumbnail Image"
                                     class="rounded-circle img-fluid img-raised" />
@@ -152,7 +152,7 @@
                                     class="btn btn-primary btn-icon btn-round" target="_blank"><i class="fab fa-linkedin"></i></a>
                             </div>
                         </div>
-                        <div class="col-md-3">
+                        <!-- <div class="col-md-3">
                             <div class="team-player">
                                 <img src="images/DerekProfilePic.jpg" alt="Thumbnail Image"
                                     class="rounded-circle img-fluid img-raised" />
@@ -167,7 +167,7 @@
                                 <a href="https://www.linkedin.com/in/weederek"
                                     class="btn btn-primary btn-icon btn-round" target="_blank"><i class="fab fa-linkedin"></i></a>
                             </div>
-                        </div>
+                        </div> -->
                     </div>
                 </div>
             </div>

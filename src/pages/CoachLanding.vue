@@ -106,9 +106,9 @@
                 <h2 class="title">Here is our team</h2>
                 <div class="team">
                     <div class="row">
-                        <div class="col-md-3">
+                      <div class="col-md-4">
                             <div class="team-player">
-                                <img src="images/DexterProfilePic.jpg" alt="Thumbnail Image"
+                                <img src="images/ArthurProfilePic.jpeg" alt="Thumbnail Image"
                                     class="rounded-circle img-fluid img-raised" />
                                 <h4 class="title">Arthur Cheng</h4>
                                 <p class="category text-primary">CIO</p>
@@ -116,17 +116,13 @@
                                     With Sporbius, the sports world will never be the same again. What a great platform
                                     to match student to qualified coaches.
                                 </h5>
-                                <a href="#pablo" class="btn btn-primary btn-icon btn-round" target="_blank"><i
-                                        class="fab fa-twitter"></i></a>
-                                <a href="#pablo" class="btn btn-primary btn-icon btn-round" target="_blank"><i
-                                        class="fab fa-facebook-square"></i></a>
-                                <a href="#pablo" class="btn btn-primary btn-icon btn-round" target="_blank"><i
+                                <a href="https://www.instagram.com/a.rrrc/" class="btn btn-primary btn-icon btn-round" target="_blank"><i
                                         class="fab fa-instagram" target="_blank"></i></a>
-                                <a href="https://www.linkedin.com/in/idexterchuaa"
+                                <a href="https://www.linkedin.com/in/arthur-cheng-a74a891b4/"
                                     class="btn btn-primary btn-icon btn-round" target="_blank"><i class="fab fa-linkedin"></i></a>
                             </div>
                         </div>
-                        <div class="col-md-3">
+                        <div class="col-md-4">
                             <div class="team-player">
                                 <img src="images/ReginaProfilePic.jpg" alt="Thumbnail Image"
                                     class="rounded-circle img-fluid img-raised" />
@@ -143,7 +139,7 @@
                                     class="btn btn-primary btn-icon btn-round" target="_blank"><i class="fab fa-linkedin"></i></a>
                             </div>
                         </div>
-                        <div class="col-md-3">
+                        <div class="col-md-4">
                             <div class="team-player">
                                 <img src="images/DexterProfilePic.jpg" alt="Thumbnail Image"
                                     class="rounded-circle img-fluid img-raised" />
@@ -153,19 +149,14 @@
                                     JUST DO IT. Calling all Sports enthusiasts, we offer a variety of sports in which
                                     you can find qualified coaches to learn from.
                                 </h5>
-                                <a href="#pablo" class="btn btn-primary btn-icon btn-round"><i
-                                        class="fab fa-google-plus" target="_blank"></i></a>
-                                <a href="#pablo" class="btn btn-primary btn-icon btn-round"><i
-                                        class="fab fa-youtube" target="_blank"></i></a>
-                                <a href="#pablo" class="btn btn-primary btn-icon btn-round"><i
-                                        class="fab fa-twitter" target="_blank"></i></a>
-                                <a href="#pablo" class="btn btn-primary btn-icon btn-round"><i
+                              
+                                <a href="https://www.instagram.com/justdexter/" class="btn btn-primary btn-icon btn-round"><i
                                         class="fab fa-instagram" target="_blank"></i></a>
                                 <a href="https://www.linkedin.com/in/idexterchuaa"
                                     class="btn btn-primary btn-icon btn-round" target="_blank"><i class="fab fa-linkedin"></i></a>
                             </div>
                         </div>
-                        <div class="col-md-3">
+                        <!-- <div class="col-md-3">
                             <div class="team-player">
                                 <img src="images/DerekProfilePic.jpg" alt="Thumbnail Image"
                                     class="rounded-circle img-fluid img-raised" />
@@ -186,7 +177,7 @@
                                 <a href="https://www.linkedin.com/in/weederek"
                                     class="btn btn-primary btn-icon btn-round" target="_blank"><i class="fab fa-linkedin"></i></a>
                             </div>
-                        </div>
+                        </div> -->
                     </div>
                 </div>
             </div>

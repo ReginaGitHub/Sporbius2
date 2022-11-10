@@ -87,19 +87,23 @@
                         <tab-pane title="Profile">
                             <i slot="label" class="now-ui-icons sport_user-run"></i>
 
-                            <div class="text-center mb-5" v-if="activities.length === 0">
+                            
+                            <div class="text-center mb-5" v-if="activities.length === 0 && videoApproval == 'Approved'">
                                 <h5 class="title">Not Available</h5>
+                            </div>
+                            <div class="text-center mb-5" v-else-if="videoApproval == 'Disapproved'">
+                                <h5 class="title">Video needs to be Approved!</h5>
                             </div>
                             <div class="row">
                                 <div class="col-md-4 text-center" v-for="(activity, idx) in activities"
-                                    v-bind:key="idx">
+                                    v-if="videoApproval == 'Approved'" v-bind:key="idx">
                                     <div class="card" style="width: 18rem;">
                                         <div class="card-body text-left">
                                             <div class="mapouter" v-html="activity.mapsrc">
                                             </div>
                                             <h5 class="card-title fw-bold my-3">Location</h5>
                                             <h5 class="card-text">{{ activity.address }} <br>Postal Code: {{
-                                            activity.postalcode
+                                                    activity.postalcode
                                             }} </h5>
                                             <h5 class="card-title fw-bold my-3">Training Details</h5>
                                             <h5 class="card-text">{{ activity.trainingdesc }}</h5>
@@ -113,25 +117,35 @@
                                                 v-if="activity.participants != undefined && activity.participants.length !== 0">
                                                 Participants</h5>
                                             <h5 class="card-text" v-for="participant in activity.participants">
-                                                {{participant}}
+                                                {{ participant }}
                                             </h5>
                                             <!-- Button trigger modal -->
                                             <div
-                                                v-if="activity.participants !== undefined && activity.participants.includes(currUserEmail) && activity.participants.length > 0">
+                                                v-if="activity.participants !== undefined && activity.participants.includes(currUserEmail) && activity.participants.length > 0 && currUserRole === 'student'">
                                                 <button class="btn btn-secondary btn-block btn-lg"
                                                     v-on:click="unjoinTrainingDetails(idx)">
                                                     <i class="ri-pin-distance-line ri-lg"></i> Unjoin
                                                 </button>
                                             </div>
-                                            <div v-else>
-                                                <button class="btn btn-primary btn-block btn-lg"
-                                                    
-                                                    v-on:click="joinTrainingDetails(idx)">
-                                                    <i class="ri-pin-distance-line ri-lg"></i> Join
-                                                </button>
+                                            <div v-else-if="currUserRole === 'student'">
+                                                <form v-bind:action="formaction" class="w-100 mx-auto" method="POST">
+                                                    <input type="hidden" name="_next" hidden
+                                                        value="http://localhost:8080/#/profile">
+                                                    <textarea label="Description" name="description" solo>
+                                                        {{ "Location: " + activity.address + "\n" +
+                                                                "Postal Code: " + activity.postalcode + "\n" +
+                                                                "Training Details: " + activity.trainingdesc + "\n" +
+                                                                "Date: " + activity.date + "\n" +
+                                                                "Timing: " + activity.starttime + " - " + activity.endtime + "\n" +
+                                                                "Price: SGD $ " + activity.price + "\n"
+                                                        }}
+                                                    </textarea>
+                                                    <button class="btn btn-primary btn-block btn-lg"
+                                                        v-on:click="joinTrainingDetails(idx)">
+                                                        <i class="ri-pin-distance-line ri-lg"></i> Join</button>
+                                                </form>
+
                                             </div>
-
-
                                         </div>
                                     </div>
                                 </div>
@@ -169,10 +183,10 @@
                                     <h4 class="text-warning title float-end" v-if="videoApproval == 'Pending Approval'">
                                         {{ videoApproval }}</h4>
                                     <h4 class="text-success title float-end" v-if="videoApproval == 'Approved'">{{
-                                    videoApproval
+                                            videoApproval
                                     }}</h4>
                                     <h4 class="text-danger title float-end" v-if="videoApproval == 'Disapproved'">{{
-                                    videoApproval
+                                            videoApproval
                                     }}</h4>
                                 </div>
                             </div>
@@ -521,20 +535,7 @@
         <div class="section">
             <div class="container">
                 <div class="button-container">
-                    <div v-if="uploadedCoverPhoto === '' && uploadedProfilePhoto === ''">
-                        <!-- Button trigger modal -->
-                        <div type="button" class="btn btn-primary btn-lg" data-bs-toggle="modal"
-                            data-bs-target="#staticBackdropAddProfilePicAndCoverPageID" v-on:click="">
-                            <i class="ri-add-line ri-lg"></i> Add Profile Picture & Cover Photo
-                        </div>
-                    </div>
-                    <div v-else>
-                        <!-- Button trigger modal -->
-                        <div type="button" class="btn btn-primary btn-lg" data-bs-toggle="modal"
-                            data-bs-target="#staticBackdropAddProfilePicAndCoverPageID" v-on:click="">
-                            <i class="ri-edit-box-line ri-lg"></i> Edit Profile Picture & Cover Photo
-                        </div>
-                    </div>
+
                 </div>
                 <div v-if="aboutMe !== '' && aboutMe !== undefined && chosenSport.length !== 0">
                     <h3 class="title">About me
@@ -590,38 +591,34 @@
                         <tab-pane title="Profile">
                             <i slot="label" class="now-ui-icons sport_user-run"></i>
 
-                            <!-- <i slot="label" class="now-ui-icons design_image"></i> -->
-                            <!-- <div class="col-md-10 ml-auto mr-auto">
-                  <div class="row collections">
-                    <div class="col-md-6">
-                      <img src="img/bg6.jpg" class="img-raised" />
-                      <img src="img/bg11.jpg" alt="" class="img-raised" />
-                    </div>
-                    <div class="col-md-6">
-                      <img src="img/bg7.jpg" alt="" class="img-raised" />
-                      <img src="img/bg8.jpg" alt="" class="img-raised" />
-                    </div>
-                  </div>
-                </div> -->
-
-
-                            <div class="row">
+                            <div class="row" v-if="JoinedActivities.length > 0">
+                                <div class="text-center mb-5">
+                                    <h5 class="title">Trainings</h5>
+                                </div>
                                 <div class="col-md-4 text-center" v-for="(activity, idx) in JoinedActivities"
                                     v-bind:key="idx">
                                     <div class="card" style="width: 18rem;">
                                         <div class="card-body text-left">
-                                            <!-- <div class="mapouter" v-html="activity.mapsrc">
-                        </div>
-                        <h5 class="card-title fw-bold my-3">Location</h5>
-                        <h5 class="card-text">{{ activity.address }} <br>Postal Code: {{ activity.postalcode }} </h5>
-                        <h5 class="card-title fw-bold my-3">Training Details</h5>
-                        <h5 class="card-text">{{ activity.trainingdesc }}</h5>
-                        <h5 class="card-title fw-bold my-3">Date</h5>
-                        <h5 class="card-text">{{ activity.date }}</h5>
-                        <h5 class="card-title fw-bold my-3">Timing</h5>
-                        <h5 class="card-text">{{ activity.starttime }} - {{ activity.endtime }}</h5>
-                        <h5 class="card-title fw-bold my-3">Price</h5>
-                        <h5 class="card-text">SGD ${{ activity.price }}/hr</h5> -->
+                                            <div class="mapouter" v-html="activity.mapsrc">
+                                            </div>
+                                            <h5 class="card-title fw-bold my-3">Location</h5>
+                                            <h5 class="card-text">{{ activity.address }} <br>Postal Code: {{
+                                                    activity.postalcode
+                                            }} </h5>
+                                            <h5 class="card-title fw-bold my-3">Training Details</h5>
+                                            <h5 class="card-text">{{ activity.trainingdesc }}</h5>
+                                            <h5 class="card-title fw-bold my-3">Date</h5>
+                                            <h5 class="card-text">{{ activity.date }}</h5>
+                                            <h5 class="card-title fw-bold my-3">Timing</h5>
+                                            <h5 class="card-text">{{ activity.starttime }} - {{ activity.endtime }}</h5>
+                                            <h5 class="card-title fw-bold my-3">Price</h5>
+                                            <h5 class="card-text">SGD ${{ activity.price }}/hr</h5>
+                                            <h5 class="card-title fw-bold my-3"
+                                                v-if="activity.participants != undefined && activity.participants.length !== 0">
+                                                Participants</h5>
+                                            <h5 class="card-text" v-for="participant in activity.participants">
+                                                {{ participant }}
+                                            </h5>
                                             <!-- Button trigger modal -->
                                             <!-- <div type="button" class="btn btn-danger btn-block btn-lg" data-bs-toggle="modal"
                           data-bs-target="#staticBackdropEditTrainingDetailsID" v-on:click="leaveTraining">
@@ -631,6 +628,11 @@
                                     </div>
                                 </div>
                             </div>
+                            <div v-else>
+                                <div class="text-center mb-5">
+                                    <h5 class="title">Have yet to join a training.</h5>
+                                </div>
+                            </div>
 
                         </tab-pane>
 
@@ -638,26 +640,8 @@
                         <tab-pane title="Messages">
                             <i slot="label" class="now-ui-icons design_image"></i>
 
-                            <!-- <div class="col-md-10 ml-auto mr-auto">
-                  <div class="row collections">
-                    <div class="col-md-6">
-                      <img src="img/bg3.jpg" alt="" class="img-raised" />
-                      <img src="img/bg8.jpg" alt="" class="img-raised" />
-                    </div>
-                    <div class="col-md-6">
-                      <img src="img/bg7.jpg" alt="" class="img-raised" />
-                      <img src="img/bg6.jpg" class="img-raised" />
-                    </div>
-                  </div>
-                </div> -->
-
-                            <div class="text-center mb-5">
-                                <h5>Add New Photo to your gallery!</h5>
-                                <!-- Button trigger modal -->
-                                <div type="button" class="btn btn-primary btn-lg" data-bs-toggle="modal"
-                                    data-bs-target="#staticBackdropPhotoGalleryID" v-on:click="removePhoto">
-                                    <i class="ri-add-line ri-lg"></i> Add New Photo to Gallery
-                                </div>
+                            <div class="text-center mb-5" v-if="photoGallery.length === 0">
+                                <h5 class="title">Not Available</h5>
                             </div>
                             <div class="row">
                                 <div class="col-md-4 text-center" v-for="(photo, idx) in photoGallery" v-bind:key="idx"
@@ -665,11 +649,6 @@
                                     <div class="mt-5" style="height: 240px">
                                         <img v-bind:src="photo" class="img-raised"
                                             style="object-fit: cover; height:100%; " />
-                                    </div>
-                                    <!-- Button trigger modal -->
-                                    <div type="button" class="btn btn-danger btn-block img-raised"
-                                        v-on:click="deletePhotoFromGallery(idx)">
-                                        <i class="ri-delete-bin-5-line ri-lg"></i> Delete Photo
                                     </div>
                                 </div>
                             </div>
@@ -889,21 +868,15 @@ export default {
             photoGallery: [],
             uploadedGalleryPhoto: '',
             participants: [],
-            currUserEmail: ''
+            currUserEmail: sessionStorage.getItem('curruseremail'),
+            currUserRole: sessionStorage.getItem('loggedRole'),
+            formaction: 'https://formsubmit.co/' + sessionStorage.getItem('curruseremail'),
 
         };
     },
     methods: {
         incrementordecrementCharacters() {
             this.charactersLength = document.getElementById('AboutMeTextareaID').value.length;
-        },
-        async beforeMount() {
-            if (sessionStorage.loggedRole == "") {
-                this.$router.push({ name: 'landing' });
-            }
-            else if (sessionStorage.loggedRole != "admin") {
-                this.$router.push({ name: "profile" });
-            }
         },
         async saveAboutMeChanges() {
             if (this.chosenSport != '') {
@@ -963,6 +936,7 @@ export default {
             this.startTimeInput = this.activities[activityID].starttime;
             this.endTimeInput = this.activities[activityID].endtime;
             this.priceInput = this.activities[activityID].price;
+
             sessionStorage.setItem("editActivityIndex", activityID);
             //session activity id
             //get activity id in editTrainingDetails()
@@ -1115,42 +1089,91 @@ export default {
             });
         },
         async joinTrainingDetails(index) {
+            var selectedProfileID = sessionStorage.getItem('viewProfileID');
 
-            var selectedProfileID = sessionStorage.getItem('viewProfileID')
+            var userID = sessionStorage.getItem('id');
+
+            const qSnapshot = await getDocs(collection(db, "users"));
+            qSnapshot.forEach((doc) => {
+                if (doc.id == userID) {
+                    this.currUserEmail = doc.data().email;
+                    if (doc.data().joinedactivities !== undefined) { //for errors like async .push(), it means that you are pushing to a undefined variable, hence just need to state that it equals to [] if undefined
+                        this.JoinedActivities = doc.data().joinedactivities;
+                    }
+                    else {
+                        this.JoinedActivities = []
+                    }
+                }
+            })
 
             if (this.activities[index].participants === undefined) {
-                this.participants.push(this.currUserEmail)
+                this.participants.push(this.currUserEmail);
             }
             else {
-                this.participants = this.activities[index].participants
-                this.participants.push(this.currUserEmail)
+                this.participants = this.activities[index].participants;
+                this.participants.push(this.currUserEmail);
             }
 
-            var activityDict = { address: this.activities[index].address, postalcode: this.activities[index].postalcode, trainingdesc: this.activities[index].trainingdesc, mapsrc: this.activities[index].mapsrc, date: this.activities[index].date, starttime: this.activities[index].starttime, endtime: this.activities[index].endtime, price: this.activities[index].price, participants: this.participants }
+            var activityDict = { userid: selectedProfileID, indexOfActivities: index, address: this.activities[index].address, postalcode: this.activities[index].postalcode, trainingdesc: this.activities[index].trainingdesc, mapsrc: this.activities[index].mapsrc, date: this.activities[index].date, starttime: this.activities[index].starttime, endtime: this.activities[index].endtime, price: this.activities[index].price, participants: this.participants };
             this.activities.splice(index, 1);
             this.activities.splice(index, 0, activityDict);
+
+            this.JoinedActivities.push(activityDict)
 
             db.collection("users").doc(selectedProfileID).update({
                 activities: this.activities,
             });
+
+            db.collection("users").doc(userID).update({
+                joinedactivities: this.JoinedActivities,
+            });
+
             this.participants = []
         },
         async unjoinTrainingDetails(index) {
-            var selectedProfileID = sessionStorage.getItem('viewProfileID')
+            var selectedProfileID = sessionStorage.getItem('viewProfileID');
+
+            var userID = sessionStorage.getItem('id');
+
+            var joinactivityIndex = -1;
 
             if (this.activities[index].participants.length > 0) {
-                this.participants = this.activities[index].participants
+                this.participants = this.activities[index].participants;
             }
 
-            this.participants.splice(this.currUserEmail)
+            this.participants.splice(this.currUserEmail);
+            var indexOfActivitiesAtUserID = this.activities[index].indexOfActivities;
 
-            var activityDict = { address: this.activities[index].address, postalcode: this.activities[index].postalcode, trainingdesc: this.activities[index].trainingdesc, mapsrc: this.activities[index].mapsrc, date: this.activities[index].date, starttime: this.activities[index].starttime, endtime: this.activities[index].endtime, price: this.activities[index].price, participants: this.participants }
+            const qSnapshot = await getDocs(collection(db, "users"));
+            qSnapshot.forEach((doc) => {
+                if (doc.id == userID) {
+                    this.currUserEmail = doc.data().email
+                    this.JoinedActivities = doc.data().joinedactivities;
+
+                    for (var i of doc.data().joinedactivities) {
+                        joinactivityIndex += 1;
+
+                        if (i.indexOfActivities == indexOfActivitiesAtUserID) {
+                            this.JoinedActivities.splice(joinactivityIndex, 1)
+
+                            db.collection("users").doc(userID).update({
+                                joinedactivities: this.JoinedActivities,
+                            });
+                        }
+                    }
+                }
+            })
+
+
+
+            var activityDict = { userid: selectedProfileID, indexOfActivities: index, address: this.activities[index].address, postalcode: this.activities[index].postalcode, trainingdesc: this.activities[index].trainingdesc, mapsrc: this.activities[index].mapsrc, date: this.activities[index].date, starttime: this.activities[index].starttime, endtime: this.activities[index].endtime, price: this.activities[index].price, participants: this.participants };
             this.activities.splice(index, 1);
             this.activities.splice(index, 0, activityDict);
 
             db.collection("users").doc(selectedProfileID).update({
                 activities: this.activities,
             });
+
         }
 
     },
@@ -1198,86 +1221,99 @@ export default {
                 this.currUserEmail = doc.data().email
             }
         })
-        console.log(this.currUserEmail)
 
-        const querySnapshot = await getDocs(collection(db, "users"), where('id', '===', viewProfileID));
+        const querySnapshot = await getDocs(collection(db, "users"));
         querySnapshot.forEach((doc) => {
-            this.nameOfUser = doc.data().name;
-            this.role = doc.data().role;
+            if (doc.id == viewProfileID) {
+                this.nameOfUser = doc.data().name;
+                this.role = doc.data().role;
 
-            if (this.aboutMe != '' && this.aboutMe != undefined) {
-                this.aboutMe = doc.data().aboutme;
-            }
-            else {
-                this.aboutMe = '';
+                if (this.aboutMe != '' && this.aboutMe != undefined) {
+                    this.aboutMe = doc.data().aboutme;
+                }
+                else {
+                    this.aboutMe = '';
+                }
+
+                if (this.viewCount != '' && this.viewCount != undefined) {
+                    this.viewCount = doc.data().viewcount;
+                }
+                else {
+                    this.viewCount = 0;
+                }
+
+                if (doc.data().sports !== undefined) {
+                    this.chosenSport = doc.data().sports;
+                    sessionStorage.setItem('sportInserted', doc.data().sports)
+                } else {
+                    this.chosenSport = []
+                    sessionStorage.setItem('sportInserted', [])
+                }
+                this.charactersLength = this.aboutMe.length
+
+                if (doc.data().activities !== undefined) {
+                    this.activities = doc.data().activities;
+                }
+                else {
+                    this.activities = [];
+                }
+
+                const date = new Date();
+
+                let day = date.getDate();
+                let month = date.getMonth() + 1;
+                let year = date.getFullYear();
+
+                this.minDate = `${year}-${month}-${day}`;
+                if (doc.data().video !== undefined) {
+                    this.uploadedVideo = doc.data().video;
+                    this.videoApproval = doc.data().videoApproved;
+                    sessionStorage.setItem('videoInserted', doc.data().video)
+
+                }
+                else if (doc.data().video == '' && doc.data().video == undefined) {
+                    this.uploadedVideo = '';
+                    this.videoApproval = '';
+                    sessionStorage.setItem('videoInserted', '')
+                }
+
+                if (doc.data().profilephoto !== undefined) {
+                    this.uploadedProfilePhoto = doc.data().profilephoto;
+                    sessionStorage.setItem('profilePhotoInserted', doc.data().profilephoto);
+                }
+                else {
+                    this.uploadedProfilePhoto = '';
+                    sessionStorage.setItem('profilePhotoInserted', '');
+                }
+
+                if (doc.data().coverphoto !== undefined) {
+                    this.uploadedCoverPhoto = doc.data().coverphoto;
+                    sessionStorage.setItem('coverPhotoInserted', doc.data().coverphoto);
+                }
+                else {
+                    this.uploadedCoverPhoto = '';
+                    sessionStorage.setItem('coverPhotoInserted', '');
+                }
+
+                if (doc.data().photogallery !== undefined) {
+                    this.photoGallery = doc.data().photogallery;
+                }
+                else {
+                    this.photoGallery = [];
+                }
+
+                if (doc.data().joinedactivities !== undefined) {
+                    this.JoinedActivities = doc.data().joinedactivities;
+                }
+                else {
+                    this.JoinedActivities = [];
+                }
+
+                if (doc.data().viewcount !== undefined) {
+                    this.viewCount = doc.data().viewcount;
+                }
             }
 
-            if (this.viewCount != '' && this.viewCount != undefined) {
-                this.viewCount = doc.data().viewcount;
-            }
-            else {
-                this.viewCount = 0;
-            }
-
-            if (doc.data().sports !== undefined) {
-                this.chosenSport = doc.data().sports;
-                sessionStorage.setItem('sportInserted', doc.data().sports)
-            } else {
-                this.chosenSport = []
-                sessionStorage.setItem('sportInserted', [])
-            }
-            this.charactersLength = this.aboutMe.length
-
-            if (doc.data().activities !== undefined) {
-                this.activities = doc.data().activities;
-            }
-            else {
-                this.activities = [];
-            }
-
-            const date = new Date();
-
-            let day = date.getDate();
-            let month = date.getMonth() + 1;
-            let year = date.getFullYear();
-
-            this.minDate = `${year}-${month}-${day}`;
-            if (doc.data().video !== undefined) {
-                this.uploadedVideo = doc.data().video;
-                this.videoApproval = doc.data().videoApproved;
-                sessionStorage.setItem('videoInserted', doc.data().video)
-
-            }
-            else if (doc.data().video == '' && doc.data().video == undefined) {
-                this.uploadedVideo = '';
-                this.videoApproval = '';
-                sessionStorage.setItem('videoInserted', '')
-            }
-
-            if (doc.data().profilephoto !== undefined) {
-                this.uploadedProfilePhoto = doc.data().profilephoto;
-                sessionStorage.setItem('profilePhotoInserted', doc.data().profilephoto);
-            }
-            else {
-                this.uploadedProfilePhoto = '';
-                sessionStorage.setItem('profilePhotoInserted', '');
-            }
-
-            if (doc.data().coverphoto !== undefined) {
-                this.uploadedCoverPhoto = doc.data().coverphoto;
-                sessionStorage.setItem('coverPhotoInserted', doc.data().coverphoto);
-            }
-            else {
-                this.uploadedCoverPhoto = '';
-                sessionStorage.setItem('coverPhotoInserted', '');
-            }
-
-            if (doc.data().photogallery !== undefined) {
-                this.photoGallery = doc.data().photogallery;
-            }
-            else {
-                this.photoGallery = [];
-            }
 
         });
     }
