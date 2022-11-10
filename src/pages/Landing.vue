@@ -28,9 +28,12 @@
       <div class="container">
         <div class="row">
           <div class="col-md-8 ml-auto mr-auto text-center">
-            <h2 class="title">Everything you need for a sport is right at your fingertips</h2>
+            <!-- <h2 class="title">Everything you need for a sport is right at your fingertips</h2> -->
+            <h2 class="title">We make sports available for everyone</h2>
+
             <h5>
-              Sporbius is a community for anyone who is interested in any type of sports. Our mission - <strong>To enable the world to playmore</strong>.
+              <!-- Sporbius is a community for anyone who is interested in any type of sports.  -->
+              Our mission - <strong>To enable the world to play more</strong>.
             </h5>
           </div>
         </div>
@@ -39,18 +42,18 @@
           <div class="row">
             <div class="col-md-6">
               <div class="image-container image-left" style="background-image: url('images/LandingCard1.jpg')">
-                <div class="img-overlay" style="padding-top: 150px; padding-left: 50px;">
+                <div class="img-overlay" style="padding-top: 100px; padding-left: 50px;">
                   <h1 class="title text-white">Find Coaches <br> near you</h1>
                 </div>
                 <!-- First image on the left side -->
-                <p class="blockquote blockquote-primary title">
+                <!-- <p class="blockquote blockquote-primary title">
                   "You believe in the long term plan but you need short term goals to motivate and
                   inspire you. Sporbius is indeed the best place that you can start learning a sport. I highly recommend
                   it."
                   <br />
                   <br />
                   - Roger Federer
-                </p>
+                </p> -->
               </div>
               <!-- Second image on the left side of the article -->
               <div class="image-container" style="background-image: url('images/LandingCard2.jpg')">
@@ -67,7 +70,7 @@
                 </div>
               </div>
               <h3 class="title">
-                Sporbius is a web app that connects avid sports players.
+                Sporbius is a platform connecting all avid sports players
               </h3>
               <h5>
                 The one and only platform that links professional coaches to interested players.

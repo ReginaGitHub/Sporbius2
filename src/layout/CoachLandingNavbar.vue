@@ -127,7 +127,6 @@
   import { DropDown, Navbar, NavLink } from '@/components';
   import { Popover } from 'element-ui';
 
-
   import {
     getAuth, createUserWithEmailAndPassword, signOut, signInWithEmailAndPassword,
     onAuthStateChanged,sendPasswordResetEmail

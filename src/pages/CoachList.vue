@@ -1,11 +1,11 @@
 <template>
     <div>
         <div class="page-header page-header-small clear-filter" filter-color="black">
-            <parallax class="page-header-image" style="background-image: url('images/StudentLand.jpg')">
+            <parallax class="page-header-image" style="background-image: url('images/CoachLandingWallpaper.jpg')">
             </parallax>
             <div class="content-center">
                 <div class="container">
-                    <h1 class="title">View the various students profiles</h1>
+                    <h1 class="title">View the various verified coaches</h1>
                     <div class="text-center">
                     </div>
                 </div>
@@ -14,7 +14,8 @@
         <div class="container">
             <div class="section">
                 <div class="row">
-                    <div class="col-md-4" v-for="(profile, idx) in listofprofiles" v-if="profile.role == 'student'">
+                    <div class="col-md-4" v-for="(profile, idx) in listofprofiles"
+                        v-if="profile.videoApproved != undefined && profile.role == 'coach' && profile.videoApproved == 'Approved'">
                         <div class="card card-plain card-blog">
                             <div class="card-image text-center ">
                                 <img v-if="profile.profilephoto == undefined || profile.profilephoto == ''"
@@ -88,8 +89,8 @@ export default {
                 var viewCount = 0;
                 const querySnapshot = await getDocs(collection(db, "users"));
                 querySnapshot.forEach((doc) => {
-                    if(doc.id == selectedProfileID){
-                        if(doc.data().viewcount !== undefined){
+                    if (doc.id == selectedProfileID) {
+                        if (doc.data().viewcount !== undefined) {
                             viewCount = doc.data().viewcount;
                         }
                     }
@@ -101,6 +102,7 @@ export default {
                 db.collection("users").doc(selectedProfileID).update({
                     viewcount: viewCount,
                 });
+
                 this.$router.push({ name: 'viewprofile' });
             }
         }
