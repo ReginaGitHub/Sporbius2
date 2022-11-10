@@ -447,8 +447,6 @@ export default {
 
         this.doChart()
 
-
-
     }
 
 };
