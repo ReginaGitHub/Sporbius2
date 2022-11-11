@@ -82,26 +82,7 @@
                 <div class="separator separator-primary"></div>
             </div>
         </div>
-        <div class="main" style="margin-top: 350px;">
-            <div class="section section-images">
-                <div class="container">
-                    <div class="row">
-                        <div class="col-md-12">
-                            <div class="hero-images-container">
-                                <img src="img/hero-image-1.png" alt="" />
-                            </div>
-                            <div class="hero-images-container-1">
-                                <img src="img/hero-image-2.png" alt="" />
-                            </div>
-                            <div class="hero-images-container-2">
-                                <img src="img/hero-image-3.png" alt="" />
-                            </div>
-                        </div>
-                    </div>
-                </div>
-            </div>
-        </div>
-        <div class="section section-team text-center p-0" style="margin-bottom: 50px;">
+        <div class="section section-team text-center p-0 mt-5" style="margin-bottom: 50px;">
             <div class="container">
                 <h2 class="title">Here is our team</h2>
                 <div class="team">
