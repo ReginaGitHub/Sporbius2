@@ -130,7 +130,7 @@
                                             <div v-else-if="currUserRole === 'student'">
                                                 <form v-bind:action="formaction" class="w-100 mx-auto" method="POST">
                                                     <input type="hidden" name="_next" hidden
-                                                        value="http://localhost:8080/#/profile">
+                                                        value="https://sporbius.netlify.app/#/profile">
                                                     <textarea label="Description" name="description" solo>
                                                         {{ "Location: " + activity.address + "\n" +
                                                                 "Postal Code: " + activity.postalcode + "\n" +
