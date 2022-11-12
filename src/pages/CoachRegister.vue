@@ -102,7 +102,7 @@ export default {
             // lowerCaseLetters: "/[a-z]/g",
             // upperCaseLetters: "/[A-Z]/g",
             // numbers: "/[0-9]/g",
-            site: "6LdTrc4iAAAAAJz9uQiJsYFDrXv8-FknOl4O7OAM",
+            site: "6LeGhwAjAAAAADb1Ohmo9a00eq5ity7vMemOx9hr",
             recaptcha: null,
 
         }
