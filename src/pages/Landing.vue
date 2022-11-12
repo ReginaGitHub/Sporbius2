@@ -162,8 +162,6 @@
                                     Sporbius. Indeed the perfect platform in finding suitable coaches while still
                                     widening the consumer base of coaches.
                                 </h5>
-                                <a href="#pablo" class="btn btn-primary btn-icon btn-round"><i
-                                        class="fab fa-instagram" target="_blank"></i></a>
                                 <a href="https://www.linkedin.com/in/weederek"
                                     class="btn btn-primary btn-icon btn-round" target="_blank"><i class="fab fa-linkedin"></i></a>
                             </div>
